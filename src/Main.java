@@ -1,0 +1,22 @@
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    public static Login loginLayer;
+    public static String dbName = "defter.db";
+    public static String sql = "jdbc:sqlite:" + dbName;
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        Controller.startup();
+        loginLayer = new Login();
+        loginLayer.start(primaryStage);
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
