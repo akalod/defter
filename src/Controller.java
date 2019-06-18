@@ -1,3 +1,6 @@
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+
 import java.io.File;
 
 import java.sql.Connection;
@@ -35,5 +38,9 @@ public class Controller {
         if(!exists){
             createDB();
         }
+    }
+
+    @FXML private void loginHandle(ActionEvent event){
+        System.out.println("aaa");
     }
 }
