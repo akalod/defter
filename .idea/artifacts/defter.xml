@@ -1,0 +1,32 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="defter">
+    <output-path>$PROJECT_DIR$/out/artifacts/defter</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="alias" value="" />
+        <option name="appClass" value="Main" />
+        <option name="description" value="" />
+        <option name="enabledSigning" value="true" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="icons">
+          <JavaFxApplicationIcons>
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/assets/notebook.ico" />
+          </JavaFxApplicationIcons>
+        </option>
+        <option name="keystore" value="" />
+        <option name="msgOutputLevel" value="Debug" />
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="Defter" />
+        <option name="vendor" value="Seyhan YILDIZ" />
+        <option name="version" value="1" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="defter.jar">
+        <element id="module-output" name="defter" />
+        <element id="library" level="project" name="org.xerial:sqlite-jdbc:3.27.2" />
+      </element>
+      <element id="library" level="project" name="org.jooq:jooq:3.11.11" />
+    </root>
+  </artifact>
+</component>
