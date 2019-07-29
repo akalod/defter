@@ -4,6 +4,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static Login loginLayer;
+    public static Searcher searchLayer;
+    public static AddPage addPageLayer;
     public static String dbName = "defter.db";
     public static String sql = "jdbc:sqlite:" + dbName;
 

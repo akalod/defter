@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="390.0" prefWidth="380.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <Button defaultButton="true" layoutX="260.0" layoutY="56.0" mnemonicParsing="false" onAction="#searchHandle" prefHeight="17.0" prefWidth="103.0" text="Ara">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="13.0" layoutY="7.0" prefHeight="37.0" prefWidth="173.0" text="Dosyalık">
+         <font>
+            <Font name="Segoe UI" size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="16.0" layoutY="56.0" prefHeight="31.0" prefWidth="226.0" />
+      <TableView layoutX="17.0" layoutY="152.0" prefHeight="225.0" prefWidth="351.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <ComboBox layoutX="16.0" layoutY="107.0" prefHeight="25.0" prefWidth="122.0" promptText="Bölge" />
+      <ComboBox layoutX="147.0" layoutY="107.0" prefHeight="25.0" prefWidth="103.0" promptText="Şehir" />
+      <ComboBox layoutX="257.0" layoutY="107.0" prefHeight="25.0" prefWidth="109.0" promptText="Şube" />
+      <Button defaultButton="true" layoutX="260.0" layoutY="10.0" mnemonicParsing="false" onAction="#addPageAction" opacity="0.6" prefHeight="17.0" prefWidth="103.0" text="Dosya Ekle">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="431.0" prefWidth="380.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <Button defaultButton="true" layoutX="241.0" layoutY="379.0" mnemonicParsing="false" onAction="#addPageAction" prefHeight="17.0" prefWidth="103.0" text="Ekle">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="13.0" layoutY="7.0" prefHeight="37.0" prefWidth="173.0" text="Dosya Ekle ">
+         <font>
+            <Font name="Segoe UI" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="file_number" layoutX="136.0" layoutY="60.0" prefHeight="25.0" prefWidth="209.0" />
+      <Label layoutX="73.0" layoutY="64.0" text="Dosya/No" />
+      <TextField fx:id="type_1" layoutX="136.0" layoutY="97.0" prefHeight="25.0" prefWidth="209.0" />
+      <Label layoutX="88.0" layoutY="101.0" text="Alacaklı" />
+      <TextField fx:id="type_2" layoutX="136.0" layoutY="134.0" prefHeight="25.0" prefWidth="209.0" />
+      <Label layoutX="92.0" layoutY="138.0" text="Borçlu" />
+      <TextField fx:id="zone" layoutX="136.0" layoutY="170.0" prefHeight="25.0" prefWidth="209.0" />
+      <Label layoutX="95.0" layoutY="174.0" text="Bölge" />
+      <TextField fx:id="city" layoutX="136.0" layoutY="208.0" prefHeight="25.0" prefWidth="209.0" />
+      <Label layoutX="97.0" layoutY="212.0" text="Şehir" />
+      <Label layoutX="97.0" layoutY="255.0" text="Şube" />
+      <TextField fx:id="branch" layoutX="136.0" layoutY="251.0" prefHeight="25.0" prefWidth="209.0" />
+      <TextArea layoutX="137.0" layoutY="294.0" prefHeight="75.0" prefWidth="209.0" />
+      <Label layoutX="93.0" layoutY="300.0" text="Adres" />
+      <Button fx:id="cancelAdd" defaultButton="true" layoutX="137.0" layoutY="379.0" mnemonicParsing="false" onAction="#cancel" prefHeight="31.0" prefWidth="90.0" text="İptal">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
