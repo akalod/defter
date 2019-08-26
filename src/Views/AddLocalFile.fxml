@@ -5,9 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="431.0" prefWidth="380.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane prefHeight="431.0" prefWidth="380.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AddPage">
    <children>
-      <Button defaultButton="true" layoutX="241.0" layoutY="379.0" mnemonicParsing="false" onAction="#addPageAction" prefHeight="17.0" prefWidth="103.0" text="Ekle">
+      <Button defaultButton="true" layoutX="241.0" layoutY="379.0" fx:id="closeButton" mnemonicParsing="false" onAction="#addAction" prefHeight="17.0" prefWidth="103.0" text="Ekle">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
@@ -29,9 +29,9 @@
       <Label layoutX="97.0" layoutY="212.0" text="Şehir" />
       <Label layoutX="97.0" layoutY="255.0" text="Şube" />
       <TextField fx:id="branch" layoutX="136.0" layoutY="251.0" prefHeight="25.0" prefWidth="209.0" />
-      <TextArea layoutX="137.0" layoutY="294.0" prefHeight="75.0" prefWidth="209.0" />
+      <TextArea fx:id="address" layoutX="137.0" layoutY="294.0" prefHeight="75.0" prefWidth="209.0" />
       <Label layoutX="93.0" layoutY="300.0" text="Adres" />
-      <Button fx:id="cancelAdd" defaultButton="true" layoutX="137.0" layoutY="379.0" mnemonicParsing="false" onAction="#cancel" prefHeight="31.0" prefWidth="90.0" text="İptal">
+      <Button fx:id="cancelAdd" defaultButton="true" layoutX="137.0" layoutY="379.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="31.0" prefWidth="90.0" text="İptal">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>

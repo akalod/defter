@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" name="defter">
-    <output-path>$PROJECT_DIR$/out/artifacts/defter</output-path>
+  <artifact type="javafx" name="defterma">
+    <output-path>$PROJECT_DIR$/out/artifacts/defterma</output-path>
     <properties id="javafx-properties">
       <options>
         <option name="alias" value="" />
@@ -26,7 +26,6 @@
         <element id="module-output" name="defter" />
         <element id="library" level="project" name="org.xerial:sqlite-jdbc:3.27.2" />
       </element>
-      <element id="library" level="project" name="org.jooq:jooq:3.11.11" />
     </root>
   </artifact>
 </component>

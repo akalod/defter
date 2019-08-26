@@ -79,6 +79,14 @@ public class Controller {
 
     }
 
+    public static void addLocalFile(String fileName, String type1, String type2 , String zone, String city, String branch , String address){
+       // DSLContext query = DSL.using(conn,SQLDialect.SQLITE);
+       /* query.insertInto("local_files","file_number","type_1","type_2","address","zone","city","branch")
+
+        query.insertInto(table(name("local_files")))
+                .set(field(name("file_number", "type_1", "type_2","address","zone","city","branch"))).values(fileName,type1,type2,address,zone,city,branch);*/
+    }
+
     @FXML
     private void loginHandle(ActionEvent event) {
         System.out.println("aaa");
@@ -86,11 +94,6 @@ public class Controller {
 
     @FXML
     private void searchHandle(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void cancel(ActionEvent event){
 
     }
 

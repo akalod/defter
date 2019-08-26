@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.stage.Stage;
 
 public class AddPage implements EventHandler<ActionEvent> {
     Button button;
+
     private Stage primaryStage;
 
     public void start() throws Exception {
@@ -30,5 +32,16 @@ public class AddPage implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         System.out.println(event.getEventType());
+    }
+    @FXML
+    private void addAction(ActionEvent event) {
+
+    }
+    @FXML private javafx.scene.control.Button closeButton;
+
+    @FXML
+    private void cancelAction() {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }

@@ -1,11 +1,11 @@
 .root {
-    -fx-background-color: #4C3AF0;
+    -fx-background-color: #efefef;
 }
 .button,
 .password-field{
     -fx-background-radius: 0;
-    -fx-background-color: #3A88F0;
+    -fx-background-color: #ffffff;
 }
 .label {
-    -fx-text-fill: #dadada;
+    -fx-text-fill: #222222;
 }
