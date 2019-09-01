@@ -7,21 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02bf96fa-cad2-44b5-87b1-44047d7f1e17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/jooq-config.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jooq-codegen-3.11.12.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jooq-meta-3.11.12.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/defter.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/defterma.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_jooq_jooq_3_11_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_xerial_sqlite_jdbc_3_27_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_xerial_sqlite_jdbc_3_27_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/localFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/defter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/defter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jooq-3.11.11.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/jooq-3.11.12.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AddPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Searcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Search.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,16 +44,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>loginHandle</find>
-      <find>addPageAction</find>
-      <find>addr</find>
-    </findStrings>
-    <dirStrings>
-      <dir>C:\Users\h4y4L\IdeaProjects\defter\src</dir>
-    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -162,6 +144,7 @@
       <workItem from="1566849786951" duration="1803000" />
       <workItem from="1566852254697" duration="1448000" />
       <workItem from="1566853832580" duration="1772000" />
+      <workItem from="1567334256069" duration="10072000" />
     </task>
     <task id="LOCAL-00001" summary="- jooq eklendi &#10;- bıdı bıdı">
       <created>1560969163051</created>

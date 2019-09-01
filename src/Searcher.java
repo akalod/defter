@@ -24,6 +24,7 @@ public class Searcher implements EventHandler<ActionEvent> {
         primaryStage.setResizable(false);
         primaryStage.setScene(screen);
         primaryStage.show();
+        Controller.refreshList();
     }
 
     @Override

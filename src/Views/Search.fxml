@@ -18,10 +18,14 @@
          </font>
       </Label>
       <TextField layoutX="16.0" layoutY="56.0" prefHeight="31.0" prefWidth="226.0" />
-      <TableView layoutX="17.0" layoutY="152.0" prefHeight="225.0" prefWidth="351.0">
+      <TableView fx:id="queryTable" layoutX="17.0" layoutY="152.0" prefHeight="225.0" prefWidth="351.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn  fx:id="col_zone" text="Bölge" />
+          <TableColumn  fx:id="col_city" text="Şehir" />
+          <TableColumn  fx:id="col_branch" text="Şube" />
+          <TableColumn  fx:id="col_fileNumber" text="Dosya/No" />
+          <TableColumn  fx:id="col_type1" text="Alacaklı" />
+          <TableColumn  fx:id="col_type2" text="Borçlu" />
         </columns>
       </TableView>
       <ComboBox layoutX="16.0" layoutY="107.0" prefHeight="25.0" prefWidth="122.0" promptText="Bölge" />
