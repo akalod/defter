@@ -80,7 +80,6 @@ public class Controller {
             System.out.println("Şifresiz giriş...");
             Main.searchLayer = new Searcher();
             Main.searchLayer.start(primaryStage);
-
         }
 
     }

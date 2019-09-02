@@ -45,12 +45,6 @@
                 <cellValueFactory><PropertyValueFactory property="type2" /></cellValueFactory>
             </TableColumn>
         </columns>
-          <items>
-              <FXCollections fx:factory="observableArrayList">
-                  <LFile zone="Test" city="as" branch="ss" fileNumber="44" type1="ss" type2="ff" />
-                  <LFile zone="Test" city="as" branch="ss" fileNumber="44" type1="ss" type2="ff" />
-              </FXCollections>
-          </items>
       </TableView>
       <ComboBox layoutX="16.0" layoutY="107.0" prefHeight="25.0" prefWidth="122.0" promptText="Bölge" />
       <ComboBox layoutX="147.0" layoutY="107.0" prefHeight="25.0" prefWidth="103.0" promptText="Şehir" />

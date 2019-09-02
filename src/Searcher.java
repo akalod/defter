@@ -8,10 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import org.jooq.DSLContext;
+import org.jooq.Record;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Searcher implements EventHandler<ActionEvent>, Initializable {
-    Button button;
+
     @FXML
     private TableView<LFile> queryTable;
 
@@ -43,7 +43,18 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
 
     public void refreshList() {
         ObservableList<LFile> data = queryTable.getItems();
-        data.add(new LFile("zone", "city", "branch", "alacakli", "verecekli", "dosya_n"));
+        data.clear();
+        DSLContext create = DSL.using(Controller.conn);
+      //  Record r = create.select(trim("*")).from("local_files").fetchAny();
+
+        for (Record rec : DSL
+                .using(Controller.conn)
+                .selectFrom("local_files")
+                .orderBy( DSL.field("file_number"))
+                .fetch()) {
+            data.add(new LFile(rec.get("zone").toString(), rec.get("city").toString(), rec.get("branch").toString(), rec.get("type_1").toString(), rec.get("type_2").toString(), rec.get("file_number").toString()));
+        }
+
 
     }
 
@@ -75,6 +86,8 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        refreshList();
+        Main.searchLayer = this;
     }
 
     @FXML
