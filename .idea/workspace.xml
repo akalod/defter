@@ -7,13 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02bf96fa-cad2-44b5-87b1-44047d7f1e17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/localFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fxmltableview/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AddPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Searcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Search.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/localFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmltableview/LFile.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

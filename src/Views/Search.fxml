@@ -5,7 +5,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="390.0" prefWidth="380.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<?import javafx.scene.control.cell.*?>
+<?import javafx.collections.*?>
+<?import fxmltableview.*?>
+
+<?import javafx.collections.FXCollections?>
+<AnchorPane prefHeight="390.0" prefWidth="380.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Searcher">
    <children>
       <Button defaultButton="true" layoutX="260.0" layoutY="56.0" mnemonicParsing="false" onAction="#searchHandle" prefHeight="17.0" prefWidth="103.0" text="Ara">
          <font>
@@ -18,15 +23,34 @@
          </font>
       </Label>
       <TextField layoutX="16.0" layoutY="56.0" prefHeight="31.0" prefWidth="226.0" />
-      <TableView fx:id="queryTable" layoutX="17.0" layoutY="152.0" prefHeight="225.0" prefWidth="351.0">
+
+     <TableView fx:id="queryTable" layoutX="17.0" layoutY="152.0" prefHeight="225.0" prefWidth="351.0">
         <columns>
-          <TableColumn  fx:id="col_zone" text="Bölge" />
-          <TableColumn  fx:id="col_city" text="Şehir" />
-          <TableColumn  fx:id="col_branch" text="Şube" />
-          <TableColumn  fx:id="col_fileNumber" text="Dosya/No" />
-          <TableColumn  fx:id="col_type1" text="Alacaklı" />
-          <TableColumn  fx:id="col_type2" text="Borçlu" />
+            <TableColumn  text="Bölge">
+                <cellValueFactory><PropertyValueFactory property="zone" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn  text="Şehir">
+                <cellValueFactory><PropertyValueFactory property="city" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn  text="Şube">
+                <cellValueFactory><PropertyValueFactory property="branch" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn  text="Dosya/No">
+                <cellValueFactory><PropertyValueFactory property="fileNumber" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn  text="Alacaklı">
+                <cellValueFactory><PropertyValueFactory property="type1" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn  text="Borçlu">
+                <cellValueFactory><PropertyValueFactory property="type2" /></cellValueFactory>
+            </TableColumn>
         </columns>
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <LFile zone="Test" city="as" branch="ss" fileNumber="44" type1="ss" type2="ff" />
+                  <LFile zone="Test" city="as" branch="ss" fileNumber="44" type1="ss" type2="ff" />
+              </FXCollections>
+          </items>
       </TableView>
       <ComboBox layoutX="16.0" layoutY="107.0" prefHeight="25.0" prefWidth="122.0" promptText="Bölge" />
       <ComboBox layoutX="147.0" layoutY="107.0" prefHeight="25.0" prefWidth="103.0" promptText="Şehir" />

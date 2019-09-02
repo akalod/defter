@@ -53,10 +53,10 @@ public class AddPage implements EventHandler<ActionEvent> {
     @FXML
     private void addAction(ActionEvent event) {
 
-        Controller.addLocalFile(file_number.getText(), type_1.getText(), type_2.getText(), zone.getText(), city.getText(), branch.getText(), address.getText());
+        Searcher.addLocalFile(file_number.getText(), type_1.getText(), type_2.getText(), zone.getText(), city.getText(), branch.getText(), address.getText());
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
-        Controller.refreshList();
+        //Controller.refreshList();
     }
 
     @FXML
