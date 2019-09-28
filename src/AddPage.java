@@ -4,9 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -19,9 +17,13 @@ public class AddPage implements EventHandler<ActionEvent> {
     @FXML
     TextField type_2;
     @FXML
-    TextField zone;
+    ChoiceBox zone;
     @FXML
-    TextField branch;
+    TextField icra_dairesi;
+    @FXML
+    TextField adliye;
+    @FXML
+    DatePicker haciz_gunu;
     @FXML
     TextField city;
     @FXML
@@ -33,12 +35,13 @@ public class AddPage implements EventHandler<ActionEvent> {
 
         Parent root = FXMLLoader.load(getClass().getResource("Views/AddLocalFile.fxml"));
         primaryStage = new Stage();
-        primaryStage.setTitle("Defter: Ekle");
+        primaryStage.setTitle("Yeni Dosya Ekle");
 
         Image image = new Image("/assets/notebook.png");
         primaryStage.getIcons().add(image);
 
         Scene screen = new Scene(root);
+
 
         primaryStage.setResizable(false);
         primaryStage.setScene(screen);
@@ -53,10 +56,21 @@ public class AddPage implements EventHandler<ActionEvent> {
     @FXML
     private void addAction(ActionEvent event) {
 
-        Searcher.addLocalFile(file_number.getText(), type_1.getText(), type_2.getText(), zone.getText(), city.getText(), branch.getText(), address.getText());
+        Searcher.addLocalFile(
+                file_number.getText(),
+                type_1.getText(),
+                type_2.getText(),
+                zone.getValue().toString(),
+                city.getText(),
+                adliye.getText(),
+                icra_dairesi.getText(),
+                haciz_gunu.getValue().toString(),
+                address.getText());
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
         Main.searchLayer.refreshList();
+        Main.searchLayer.loadAdliyeList();
+        Main.searchLayer.loadSehirList();
     }
 
     @FXML

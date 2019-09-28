@@ -34,7 +34,7 @@ public class Controller {
                     s.execute("INSERT INTO settings (id,key,value) VALUES(1,'admin','admin')");
                 } else {
                     /* bu kısım bir kaç avukat arkadaş için revize edilerek başlatılmıştır */
-                    s.execute("CREATE TABLE local_files (id integer PRIMARY KEY, file_number text NOT NULL, type_1 text, type_2 text,address text,zone text,city text,branch text);");
+                    s.execute("CREATE TABLE local_files (id integer PRIMARY KEY, file_number text NOT NULL UNIQUE , type_1 text, type_2 text,address text,zone text,city text,icra_dairesi text,haciz_gunu text,adliye text ) ;");
                 }
 
                 System.out.println("Database olusturuldu");

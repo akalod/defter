@@ -7,22 +7,34 @@ public class LFile {
 
     private final SimpleStringProperty zone = new SimpleStringProperty("");
     private final SimpleStringProperty city = new SimpleStringProperty("");
-    private final SimpleStringProperty branch = new SimpleStringProperty("");
+    private final SimpleStringProperty adliye = new SimpleStringProperty("");
+    private final SimpleStringProperty icraDairesi = new SimpleStringProperty("");
+    private final SimpleStringProperty hacizGunu = new SimpleStringProperty("");
     private final SimpleStringProperty type1 = new SimpleStringProperty("");
     private final SimpleStringProperty type2 = new SimpleStringProperty("");
     private final SimpleStringProperty fileNumber = new SimpleStringProperty("");
 
     public LFile() {
-        this("", "", "","","","");
+        this("", "", "", "", "", "","","");
     }
 
-    public LFile(String zone, String city, String branch, String type1, String type2, String fileNumber) {
+    public LFile(String zone, String city, String adliye, String type1, String type2, String fileNumber, String hacizGunu, String icraDairesi) {
         setZone(zone);
         setCity(city);
-        setBranch(branch);
+        setAdliye(adliye);
+        setHacizGunu(hacizGunu);
+        setIcraDairesi(icraDairesi);
         setType1(type1);
         setType2(type2);
         setFileNumber(fileNumber);
+    }
+
+    public void setHacizGunu(String par) {
+        hacizGunu.set(par);
+    }
+
+    public void setIcraDairesi(String par) {
+        icraDairesi.set(par);
     }
 
     public void setZone(String par) {
@@ -33,8 +45,8 @@ public class LFile {
         city.set(par);
     }
 
-    public void setBranch(String par) {
-        branch.set(par);
+    public void setAdliye(String par) {
+        adliye.set(par);
     }
 
     public void setType1(String par) {
@@ -49,9 +61,6 @@ public class LFile {
         fileNumber.set(par);
     }
 
-    public String getBranch() {
-        return branch.get();
-    }
 
     public String getCity() {
         return city.get();
@@ -71,6 +80,15 @@ public class LFile {
 
     public String getType2() {
         return type1.get();
+    }
+    public String getAdliye() {
+        return adliye.get();
+    }
+    public String getIcraDairesi() {
+        return icraDairesi.get();
+    }
+    public String getHacizGunu() {
+        return hacizGunu.get();
     }
 
 

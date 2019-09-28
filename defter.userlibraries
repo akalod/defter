@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="org.xerial:sqlite-jdbc:3.27.2">
+    <archive path="C:/Users/h4y4L/IdeaProjects/defter/lib/sqlite-jdbc-3.27.2.jar" />
+    <archive path="C:/Users/h4y4L/IdeaProjects/defter/lib/jooq-codegen-3.11.12.jar" />
+    <archive path="C:/Users/h4y4L/IdeaProjects/defter/lib/jooq-meta-3.11.12.jar" />
+    <archive path="C:/Users/h4y4L/IdeaProjects/defter/lib/jooq-3.11.12.jar" />
+  </library>
+</eclipse-userlibraries>
+
