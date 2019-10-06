@@ -3,6 +3,9 @@ package fxmltableview;
 import javafx.scene.control.TableView;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class LFile {
 
     private final SimpleStringProperty zone = new SimpleStringProperty("");
@@ -13,12 +16,13 @@ public class LFile {
     private final SimpleStringProperty type1 = new SimpleStringProperty("");
     private final SimpleStringProperty type2 = new SimpleStringProperty("");
     private final SimpleStringProperty fileNumber = new SimpleStringProperty("");
+    private final SimpleStringProperty address = new SimpleStringProperty("");
 
     public LFile() {
-        this("", "", "", "", "", "","","");
+        this("", "", "", "", "", "", "", "", "");
     }
 
-    public LFile(String zone, String city, String adliye, String type1, String type2, String fileNumber, String hacizGunu, String icraDairesi) {
+    public LFile(String zone, String city, String adliye, String type1, String type2, String fileNumber, String hacizGunu, String icraDairesi, String address) {
         setZone(zone);
         setCity(city);
         setAdliye(adliye);
@@ -27,6 +31,7 @@ public class LFile {
         setType1(type1);
         setType2(type2);
         setFileNumber(fileNumber);
+        setAddress(address);
     }
 
     public void setHacizGunu(String par) {
@@ -35,6 +40,10 @@ public class LFile {
 
     public void setIcraDairesi(String par) {
         icraDairesi.set(par);
+    }
+
+    public void setAddress(String par) {
+        address.set(par);
     }
 
     public void setZone(String par) {
@@ -79,28 +88,26 @@ public class LFile {
     }
 
     public String getType2() {
-        return type1.get();
+        return type2.get();
     }
+
     public String getAdliye() {
         return adliye.get();
     }
+
     public String getIcraDairesi() {
         return icraDairesi.get();
     }
+
     public String getHacizGunu() {
         return hacizGunu.get();
     }
 
+    public LocalDate getHacizGunuDate(){
+        return LocalDate.parse(hacizGunu.get());
+    }
 
-
-    /*
-    public getColumns(){
-
-          <TableColumn  text="Bölge" />
-          <TableColumn  text="Şehir" />
-          <TableColumn  text="Şube" />
-          <TableColumn  text="Dosya/No" />
-          <TableColumn  text="Alacaklı" />
-          <TableColumn  text="Borçlu" />
-    }*/
+    public String getAddress() {
+        return address.get();
+    }
 }

@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class AddPage implements EventHandler<ActionEvent> {
-    Button button;
     @FXML
     TextField file_number;
     @FXML
@@ -68,9 +67,7 @@ public class AddPage implements EventHandler<ActionEvent> {
                 address.getText());
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
-        Main.searchLayer.refreshList();
-        Main.searchLayer.loadAdliyeList();
-        Main.searchLayer.loadSehirList();
+        Main.searchLayer.loadAllLists();
     }
 
     @FXML

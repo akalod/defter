@@ -6,13 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02bf96fa-cad2-44b5-87b1-44047d7f1e17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/logo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/49b91efc-cd46-4d1c-9fd2-d588f9c404ba.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/49b91efc-cd46-4d1c-9fd2-d588f9c404ba.xml" afterDir="false" />
+    <list default="true" id="02bf96fa-cad2-44b5-87b1-44047d7f1e17" name="Default Changelist" comment="-- proje tamamlanma">
+      <change afterPath="$PROJECT_DIR$/macAddress.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EditPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/EditLocalFile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/defter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/defter.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AddPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Searcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Search.fxml" afterDir="false" />
@@ -81,7 +82,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jooq-3.11.12.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Views" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -157,7 +158,9 @@
       <workItem from="1569618701230" duration="3608000" />
       <workItem from="1569622377091" duration="3602000" />
       <workItem from="1569626055438" duration="3572000" />
-      <workItem from="1569660839342" duration="5860000" />
+      <workItem from="1569660839342" duration="6516000" />
+      <workItem from="1570345797603" duration="1745000" />
+      <workItem from="1570349161066" duration="13969000" />
     </task>
     <task id="LOCAL-00001" summary="- jooq eklendi &#10;- bıdı bıdı">
       <created>1560969163051</created>
@@ -187,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567449831184</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="-- proje tamamlanma">
+      <created>1569669080773</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1569669080773</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +220,8 @@
     <MESSAGE value="- jooq eklendi &#10;- bıdı bıdı" />
     <MESSAGE value="-- bakkal defterinden avukat dosyalığına döndürüyoruz (uyduruktan basit bişiy olarak ama öyle ciddi bişiy değil)" />
     <MESSAGE value="-- ekleme listeleme tamam" />
-    <option name="LAST_COMMIT_MESSAGE" value="-- ekleme listeleme tamam" />
+    <MESSAGE value="-- proje tamamlanma" />
+    <option name="LAST_COMMIT_MESSAGE" value="-- proje tamamlanma" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/defter$Main.ic" NAME="Main Coverage Results" MODIFIED="1560890987586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

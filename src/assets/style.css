@@ -40,6 +40,13 @@
     -fx-border-radius: 0;
     -fx-border-color: #222222;
 }
+.remove {
+    -fx-background-color: #921212;
+    -fx-border-color: #921212;
+    -fx-text-fill: #ffffff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 0;
+}
 .search {
     -fx-background-color: #1daaf1;
 }
@@ -67,9 +74,11 @@
     -fx-text-background-color:  #000000;
     -fx-background-color: #000000;
     -fx-fill: #222222;
+    -fx-padding: 0;
 }
 .table-row-cell:selected .text {
     -fx-fill: #ffffff ;
+    -fx-padding: 0;
 
 }
 .table-row-cell:selected,
@@ -78,4 +87,5 @@
     -fx-background-color: #50ad55;
     -fx-fill: #50ad55;
     -fx-border-color: #50ad55;
+    -fx-padding: 0;
 }

@@ -1,13 +1,17 @@
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.jooq.Record;
-import org.jooq.SQLDialect;
 import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
 
+import java.io.BufferedReader;
 import java.io.File;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,6 +26,35 @@ public class Controller {
     private static boolean FileLister = true;
     private static Stage stage;
 
+    private static void loadMacFromFile() {
+
+        try {
+            Statement s = conn.createStatement();
+            StringBuilder sb = new StringBuilder();
+
+            try (BufferedReader br = Files.newBufferedReader(Paths.get("macAddress.txt"))) {
+
+                // read line by line
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                    // sql into
+                    s.execute("INSERT INTO mac_allow (mac) VALUES('" + sb.toString() + "')");
+                    sb = new StringBuilder();
+                }
+
+            } catch (IOException e) {
+                System.err.format("IOException: %s%n", e);
+                System.exit(-1);
+            }
+
+            System.out.println(sb);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.exit(-1);
+        }
+    }
+
     private static void createDB() {
 
         if (conn != null) {
@@ -35,16 +68,25 @@ public class Controller {
                 } else {
                     /* bu kısım bir kaç avukat arkadaş için revize edilerek başlatılmıştır */
                     s.execute("CREATE TABLE local_files (id integer PRIMARY KEY, file_number text NOT NULL UNIQUE , type_1 text, type_2 text,address text,zone text,city text,icra_dairesi text,haciz_gunu text,adliye text ) ;");
+                    s.execute("CREATE TABLE mac_allow (id integer PRIMARY KEY, mac text NOT NULL UNIQUE ) ;");
+                    loadMacFromFile();
                 }
-
                 System.out.println("Database olusturuldu");
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 System.exit(-1);
             }
         }
+    }
 
+    public static void checkMacAllow() {
 
+        DSLContext create = DSL.using(conn);
+        Record r = create.select(trim("*"), count()).from("mac_allow").where("mac='" + Main.MACAddress + "'").fetchOne();
+        if (Integer.parseInt(r.get("count").toString()) == 0) {
+            System.out.println("Erişime izin verilmedi");
+            System.exit(-1);
+        }
     }
 
     public static void startup() {
@@ -59,6 +101,7 @@ public class Controller {
         if (!exists) {
             createDB();
         }
+        checkMacAllow();
     }
 
     public static void showAlert(String Title, String notice) {

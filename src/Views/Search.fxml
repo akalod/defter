@@ -10,13 +10,13 @@
 <?import fxmltableview.*?>
 <?import javafx.collections.FXCollections ?>
 
-<AnchorPane prefHeight="595.0" prefWidth="843.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Searcher">
+<AnchorPane prefHeight="595.0" prefWidth="1000.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Searcher">
    <children>
-      <Pane layoutX="24.0" layoutY="99.0" prefHeight="67.0" prefWidth="796.0" styleClass="border">
+      <Pane layoutX="24.0" layoutY="99.0" prefHeight="67.0" prefWidth="957.0" styleClass="border">
          <children>
-            <TextField fx:id="q" layoutX="14.0" layoutY="15.0" onKeyPressed="#qChanged" prefHeight="37.0" prefWidth="239.0" promptText="Sorgulama metnini giriniz!" styleClass="input"  onMouseClicked="#qChanged" />
-            <ComboBox fx:id="adliye" layoutX="267.0" layoutY="15.0" prefHeight="37.0" prefWidth="122.0" promptText="Adliye" styleClass="input"  onMouseClicked="#adliyeChange"/>
-            <ComboBox fx:id="zone" layoutX="398.0" layoutY="15.0" prefHeight="37.0" prefWidth="103.0" promptText="Bölge" styleClass="input" onMouseClicked="#zoneChange">
+            <TextField fx:id="q" layoutX="14.0" layoutY="15.0" onKeyPressed="#qChanged" onMouseClicked="#qChanged" prefHeight="37.0" prefWidth="239.0" promptText="Sorgulama metnini giriniz!" styleClass="input" />
+            <ComboBox fx:id="adliye" layoutX="267.0" layoutY="15.0" onMouseClicked="#adliyeChange" prefHeight="37.0" prefWidth="171.0" promptText="Adliye" styleClass="input" />
+            <ComboBox fx:id="zone" layoutX="452.0" layoutY="15.0" onMouseClicked="#zoneChange" prefHeight="37.0" prefWidth="179.0" promptText="Bölge" styleClass="input">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Bölge" />
@@ -30,8 +30,8 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox fx:id="city" layoutX="509.0" layoutY="15.0" prefHeight="37.0" prefWidth="109.0" promptText="Şehir" styleClass="input"  onMouseClicked="#cityChange" />
-            <Button defaultButton="true" layoutX="634.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchHandle" prefHeight="37.0" prefWidth="148.0" styleClass="search" text="Ara">
+            <ComboBox fx:id="city" layoutX="643.0" layoutY="15.0" onMouseClicked="#cityChange" prefHeight="37.0" prefWidth="142.0" promptText="Şehir" styleClass="input" />
+            <Button defaultButton="true" layoutX="795.0" layoutY="15.0" mnemonicParsing="false" onAction="#searchHandle" prefHeight="37.0" prefWidth="148.0" styleClass="search" text="Ara">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
@@ -39,43 +39,40 @@
          </children>
       </Pane>
 
-     <TableView fx:id="queryTable" layoutX="23.0" layoutY="191.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="796.0" styleClass="grid">
+     <TableView fx:id="queryTable" layoutX="23.0" layoutY="191.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="957.0" styleClass="grid" onMouseClicked="#showFile">
         <columns>
-            <TableColumn text="İCRA DAİRESİ">
+            <TableColumn text="İCRA DAİRESİ" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="icraDairesi" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="DOSYA NO">
+            <TableColumn text="DOSYA NO" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="fileNumber" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="ALACAKLI">
+            <TableColumn text="ALACAKLI" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="type1" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="BORÇLU">
+            <TableColumn text="BORÇLU" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="type2" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="ADLİYE">
+            <TableColumn text="ADLİYE" prefWidth="200">
                 <cellValueFactory><PropertyValueFactory property="adliye" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="BÖLGE">
+            <TableColumn text="BÖLGE" prefWidth="140">
                 <cellValueFactory><PropertyValueFactory property="zone" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="ŞEHİR">
+            <TableColumn text="ŞEHİR" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="city" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="ADLİYE">
-                <cellValueFactory><PropertyValueFactory property="adliye" /></cellValueFactory>
-            </TableColumn>
-            <TableColumn text="HACİZ GÜNÜ">
+            <TableColumn text="HACİZ GÜNÜ" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="hacizGunu" /></cellValueFactory>
             </TableColumn>
         </columns>
       </TableView>
-      <Button layoutX="671.0" layoutY="28.0" mnemonicParsing="false" onAction="#addPageAction" prefHeight="47.0" prefWidth="148.0" styleClass="add" text="Yeni Dosya Ekle">
+      <Button layoutX="832.0" layoutY="28.0" mnemonicParsing="false" onAction="#addPageAction" prefHeight="47.0" prefWidth="148.0" styleClass="add" text="Yeni Dosya Ekle">
          <font>
             <Font name="Segoe UI" size="12.0" />
          </font>
       </Button>
-      <ImageView fitHeight="67.0" fitWidth="93.0" layoutX="22.0" layoutY="8.0">
+      <ImageView fitHeight="67.0" fitWidth="93.0" layoutX="22.0" layoutY="8.0" onMouseClicked="#openPage">
          <image>
             <Image url="@../assets/logo.jpg" />
          </image>
