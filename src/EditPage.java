@@ -33,11 +33,12 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     TextField adliye;
     @FXML
-    DatePicker haciz_gunu;
+    ChoiceBox haciz_gunu;
     @FXML
     TextField city;
     @FXML
-    TextArea address;
+    TextArea evliyat;
+
     private Stage stage;
 
 
@@ -78,9 +79,9 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
         type_2.setText(lData.getType2());
         file_number.setText(lData.getFileNumber());
         adliye.setText(lData.getAdliye());
-        address.setText(lData.getAddress());
+        evliyat.setText(lData.getEvliyat());
         zone.setValue(lData.getZone());
-        haciz_gunu.setValue(lData.getHacizGunuDate());
+        haciz_gunu.setValue(lData.getHacizGunu());
         icra_dairesi.setText(lData.getIcraDairesi());
     }
 
@@ -103,7 +104,7 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
                 adliye.getText(),
                 icra_dairesi.getText(),
                 haciz_gunu.getValue().toString(),
-                address.getText());
+                evliyat.getText());
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
         Main.searchLayer.loadAllLists();

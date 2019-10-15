@@ -1,4 +1,5 @@
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,11 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import ru.vas7n.va.widgets.MaskField;
 
 public class AddPage implements EventHandler<ActionEvent> {
     @FXML
-    TextField file_number;
+    MaskField file_number;
     @FXML
     TextField type_1;
     @FXML
@@ -22,11 +26,11 @@ public class AddPage implements EventHandler<ActionEvent> {
     @FXML
     TextField adliye;
     @FXML
-    DatePicker haciz_gunu;
+    ChoiceBox haciz_gunu;
     @FXML
     TextField city;
     @FXML
-    TextArea address;
+    TextArea evliyat;
 
     private Stage primaryStage;
 
@@ -64,7 +68,7 @@ public class AddPage implements EventHandler<ActionEvent> {
                 adliye.getText(),
                 icra_dairesi.getText(),
                 haciz_gunu.getValue().toString(),
-                address.getText());
+                evliyat.getText());
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
         Main.searchLayer.loadAllLists();
@@ -77,5 +81,21 @@ public class AddPage implements EventHandler<ActionEvent> {
     private void cancelAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void keyUp(KeyEvent e) {
+        if (e.getCode().isLetterKey() || e.getCode().isDigitKey()) {
+
+            String t = file_number.getText();
+            if (t.length() == 4 && t.matches("[-+]?\\d*\\.?\\d+")) {
+                t = t + "/";
+            } else if (t.length() < 4 && !t.matches("[-+]?\\d*\\.?\\d+")) {
+                t = "";
+            }
+            file_number.setText(t);
+            file_number.endOfNextWord();
+            file_number.positionCaret(file_number.getCaretPosition());
+        }
     }
 }

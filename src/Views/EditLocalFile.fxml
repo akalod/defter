@@ -27,29 +27,40 @@
       <ChoiceBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Karadeniz Bölgesi" />
-               <String fx:value="Akdeniz Bölgesi" />
-               <String fx:value="Ege Bölgesi" />
-               <String fx:value="Doğu Anadolu Bölgesi" />
-               <String fx:value="İç Anadolu Bölgesi" />
-               <String fx:value="Güneydoğu Anadolu Bölgesi" />
-               <String fx:value="Marmara Bölgesi" />
+               <String fx:value="KARADENİZ BÖLGESİ" />
+               <String fx:value="AKDENİZ BÖLGESİ" />
+               <String fx:value="EGE BÖLGESİ" />
+               <String fx:value="DOĞU ANADOLU BÖLGESİ" />
+               <String fx:value="İÇ ANADOLU BÖLGESİ" />
+               <String fx:value="GÜNEYDOĞU ANADOLU BÖLGESİ" />
+               <String fx:value="MARMARA BÖLGESİ" />
             </FXCollections>
          </items>
       </ChoiceBox>
       <TextField fx:id="city" layoutX="136.0" layoutY="257.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <Label layoutX="89.0" layoutY="261.0" text="ŞEHİR" />
       <Label layoutX="53.0" layoutY="304.0" text="HACİZ GÜNÜ" />
-      <DatePicker fx:id="haciz_gunu" layoutX="135.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
+      <ChoiceBox fx:id="haciz_gunu" layoutX="135.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="PAZARTESİ" />
+               <String fx:value="SALI" />
+               <String fx:value="ÇARŞAMBA" />
+               <String fx:value="PERŞEMBE" />
+               <String fx:value="CUMA" />
+               <String fx:value="DİĞER" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
       <Label layoutX="85.0" layoutY="187.0" text="ADLİYE" />
-      <TextArea fx:id="address" layoutX="137.0" layoutY="343.0" prefHeight="75.0" prefWidth="209.0" styleClass="input" />
-      <Label layoutX="86.0" layoutY="343.0" text="ADRES" />
+      <TextArea fx:id="evliyat" layoutX="137.0" layoutY="343.0" prefHeight="75.0" prefWidth="209.0" styleClass="input" />
+      <Label layoutX="86.0" layoutY="343.0" text="EVLİYAT" />
       <Button fx:id="cancel" layoutX="137.0" layoutY="428.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="31.0" prefWidth="90.0" text="İptal">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="remove" layoutX="32.0" layoutY="428.0" mnemonicParsing="false" onAction="#removeAction"  styleClass="remove" prefHeight="31.0" prefWidth="90.0" text="SİL">
+      <Button layoutX="32.0" layoutY="428.0" mnemonicParsing="false" onAction="#removeAction"  styleClass="remove" prefHeight="31.0" prefWidth="90.0" text="SİL">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>

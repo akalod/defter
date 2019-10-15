@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.FXCollections ?>
+<?import ru.vas7n.va.widgets.MaskField?>
 
 <AnchorPane prefHeight="536.0" prefWidth="380.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AddPage">
    <children>
@@ -15,7 +16,7 @@
       </Button>
       <TextField fx:id="icra_dairesi" layoutX="136.0" layoutY="32.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <Label layoutX="58.0" layoutY="33.0" text="İCRA DAİRESİ" textAlignment="JUSTIFY" />
-      <TextField fx:id="file_number" layoutX="136.0" layoutY="69.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
+      <MaskField mask="DDDD/DDDDDDDDDD" fx:id="file_number"   layoutX="136.0" layoutY="69.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <Label layoutX="66.0" layoutY="73.0" text="DOSYA NO" textAlignment="JUSTIFY" />
       <TextField fx:id="type_1" layoutX="136.0" layoutY="106.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <Label layoutX="73.0" layoutY="110.0" text="ALACAKLI" />
@@ -23,26 +24,37 @@
       <Label layoutX="77.0" layoutY="147.0" text="BORÇLU" />
       <TextField fx:id="adliye" layoutX="137.0" layoutY="182.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <Label layoutX="84.0" layoutY="223.0" text="BÖLGE" />
-      <ChoiceBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="Marmara Bölgesi">
+      <ChoiceBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="MARMARA BÖLGESİ">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Karadeniz Bölgesi" />
-               <String fx:value="Akdeniz Bölgesi" />
-               <String fx:value="Ege Bölgesi" />
-               <String fx:value="Doğu Anadolu Bölgesi" />
-               <String fx:value="İç Anadolu Bölgesi" />
-               <String fx:value="Güneydoğu Anadolu Bölgesi" />
-               <String fx:value="Marmara Bölgesi" />
+               <String fx:value="KARADENİZ BÖLGESİ" />
+               <String fx:value="AKDENİZ BÖLGESİ" />
+               <String fx:value="EGE BÖLGESİ" />
+               <String fx:value="DOĞU ANADOLU BÖLGESİ" />
+               <String fx:value="İÇ ANADOLU BÖLGESİ" />
+               <String fx:value="GÜNEYDOĞU ANADOLU BÖLGESİ" />
+               <String fx:value="MARMARA BÖLGESİ" />
             </FXCollections>
          </items>
       </ChoiceBox>
       <TextField fx:id="city" layoutX="136.0" layoutY="257.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <Label layoutX="89.0" layoutY="261.0" text="ŞEHİR" />
       <Label layoutX="53.0" layoutY="304.0" text="HACİZ GÜNÜ" />
-      <DatePicker fx:id="haciz_gunu" layoutX="135.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
+      <ChoiceBox fx:id="haciz_gunu" layoutX="135.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="PAZARTESİ">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="PAZARTESİ" />
+               <String fx:value="SALI" />
+               <String fx:value="ÇARŞAMBA" />
+               <String fx:value="PERŞEMBE" />
+               <String fx:value="CUMA" />
+               <String fx:value="DİĞER" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
       <Label layoutX="85.0" layoutY="187.0" text="ADLİYE" />
-      <TextArea fx:id="address" layoutX="137.0" layoutY="343.0" prefHeight="75.0" prefWidth="209.0" styleClass="input" />
-      <Label layoutX="86.0" layoutY="343.0" text="ADRES" />
+      <TextArea fx:id="evliyat" layoutX="137.0" layoutY="343.0" prefHeight="75.0" prefWidth="209.0" styleClass="input" />
+      <Label layoutX="86.0" layoutY="343.0" text="EVLİYAT" />
       <Button fx:id="cancelAdd" layoutX="137.0" layoutY="428.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="31.0" prefWidth="90.0" text="İptal">
          <font>
             <Font name="Segoe UI" size="16.0" />

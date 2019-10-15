@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="defter">
+    <output-path>$PROJECT_DIR$/out/artifacts/defter</output-path>
+    <root id="root">
+      <element id="module-output" name="defter" />
+    </root>
+  </artifact>
+</component>

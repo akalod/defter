@@ -1,4 +1,6 @@
 import fxmltableview.LFile;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,15 +11,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import org.jooq.*;
 import org.jooq.impl.DSL;
-import org.jooq.meta.derby.sys.Sys;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -43,6 +44,9 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     @FXML
     private ComboBox city;
 
+    @FXML
+    private Integer totalResult = 0;
+
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("Views/Search.fxml"));
@@ -64,7 +68,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
 
         ObservableList a = adliye.getItems();
         a.clear();
-        a.add("Adliye");
+        a.add("ADLİYE");
         for (Record rec :
                 DSL.using(Controller.conn)
                         .select(DSL.field("DISTINCT(UPPER(adliye))").as("adliye"))
@@ -79,7 +83,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
 
         ObservableList a = city.getItems();
         a.clear();
-        a.add("Şehir");
+        a.add("ŞEHİR");
         for (Record rec :
                 DSL.using(Controller.conn)
                         .select(DSL.field("DISTINCT(UPPER(city))").as("city"))
@@ -109,67 +113,67 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         data.clear();
 
         SelectSeekStep1<Record, Object> ra;
+        String[] looksUp = new String[5];
+        Integer wCount = 0;
+
+        looksUp[0] = "type_1";
+        looksUp[1] = "type_2";
+        looksUp[2] = "haciz_gunu";
+        looksUp[3] = "icra_dairesi";
+        looksUp[4] = "file_number";
+
+        String nQ = trFilterLike(q.getText().trim().replaceAll("'", "").toUpperCase());
+        SelectWhereStep<Record> dyn = DSL
+                .using(Controller.conn)
+                .selectFrom("local_files");
+
         //önce girdi var mı?
-        if (zone.getValue() != null && !"Bölge".equalsIgnoreCase(zone.getValue().trim())
-                || city.getValue() != null && !"Şehir".equalsIgnoreCase(city.getValue().toString().trim())
-                || adliye.getValue() != null && !"Adliye".equalsIgnoreCase(adliye.getValue().toString().trim())
+        if (zone.getValue() != null && !"BÖLGE".equalsIgnoreCase(zone.getValue().trim())
+                || city.getValue() != null && !"ŞEHİR".equalsIgnoreCase(city.getValue().toString().trim())
+                || adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(adliye.getValue().toString().trim())
                 || q.getText() != null && !q.getText().equals("")
         ) {
-            //System.out.println(trFilterLike(q.getText().toUpperCase()));
-        } else {
-            //diğer koşul
-        }
+            if (city.getValue() != null && !"ŞEHİR".equalsIgnoreCase(city.getValue().toString().trim())) {
+                dyn.where("city ='" + city.getValue().toString() + "'");
+                wCount++;
+            }
+            if (adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(city.getValue().toString().trim())) {
+                dyn.where("adliye ='" + adliye.getValue().toString() + "'");
+                wCount++;
+            }
+            if (zone.getValue() != null && !"BÖLGE".equalsIgnoreCase(zone.getValue().trim())) {
+                dyn.where("zone ='" + zone.getValue() + "'");
+                wCount++;
+            }
 
-        if (zone.getValue() != null && !"Bölge".equalsIgnoreCase(zone.getValue().trim())) {
-            // Bölge Seçimi
-            ra = DSL
-                    .using(Controller.conn)
-                    .selectFrom("local_files")
-                    .where("zone ='" + zone.getValue().toString() + "'")
-                    .orderBy(DSL.field("file_number"));
-        } else if (city.getValue() != null && !"Şehir".equalsIgnoreCase(city.getValue().toString().trim())) {
-            //şehir seçimi
-            ra = DSL
-                    .using(Controller.conn)
-                    .selectFrom("local_files")
-                    .where("city ='" + city.getValue().toString() + "'")
-                    .orderBy(DSL.field("file_number"));
-        } else if (adliye.getValue() != null && !"Adliye".equalsIgnoreCase(adliye.getValue().toString().trim())) {
-            //Adliye seçimi
-            ra = DSL
-                    .using(Controller.conn)
-                    .selectFrom("local_files")
-                    .where("adliye ='" + adliye.getValue().toString() + "'")
-                    .orderBy(DSL.field("file_number"));
-        } else if (q.getText() != null && !q.getText().equals("")) {
-            // query sonucu
-            String nQ = trFilterLike(q.getText().trim().replaceAll("'", "").toUpperCase());
+            if (q.getText() != null && !q.getText().equals("")) {
+                int size = looksUp.length;
+                for (int i = 0; i < size; i++) {
+                    if (wCount > 0 || i > 0) {
+                        if (city.getValue() != null && !"ŞEHİR".equalsIgnoreCase(city.getValue().toString().trim())) {
+                            dyn.where("city ='" + city.getValue().toString() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
+                        } else if (adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(city.getValue().toString().trim())) {
+                            dyn.where("adliye ='" + adliye.getValue().toString() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
+                        } else if (zone.getValue() != null && !"BÖLGE".equalsIgnoreCase(zone.getValue().trim())) {
+                            dyn.where("zone ='" + zone.getValue() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
+                        } else {
+                            dyn.where("1=1").or(looksUp[i] + " like '%" + nQ + "%' ");
+                        }
+                    } else {
+                        dyn.where(looksUp[i] + " like '%" + nQ + "%' ");
+                    }
+                }
+            }
 
-            System.out.println(nQ);
-            ra = DSL
-                    .using(Controller.conn)
-                    .selectFrom("local_files")
-                    .where("file_number like '%" + nQ + "%' ")
-                    .or("type_1 like '%" + nQ + "%' ")
-                    .or("zone like '%" + nQ + "%' ")
-                    .or("type_2 like '%" + nQ + "%' ")
-                    .or("city like '%" + nQ + "%' ")
-                    .or("icra_dairesi like '%" + nQ + "%' ")
-                    .or("haciz_gunu like '%" + nQ + "%' ")
-                    .or("adliye like '%" + nQ + "%' ")
-                    .or("id ='" + nQ + "' ")
+            ra = dyn.orderBy(DSL.field("file_number"));
 
-                    .orderBy(DSL.field("file_number"));
 
         } else {
-            // Tüm liste
-            ra = DSL
-                    .using(Controller.conn)
-                    .selectFrom("local_files")
-                    .orderBy(DSL.field("file_number"));
-
+            //filtre yokken yapılacaklar ile ilgili kısım
+            ra = dyn.orderBy(DSL.field("file_number"));
         }
 
+        totalResult = ra.fetchCount();
 
         for (Record rec :
                 ra.fetch()) {
@@ -182,7 +186,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     rec.get("file_number").toString(),
                     rec.get("haciz_gunu").toString(),
                     rec.get("icra_dairesi").toString(),
-                    rec.get("address").toString()));
+                    rec.get("evliyat").toString()));
         }
 
     }
@@ -197,19 +201,19 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         }
     }
 
-    public static void editLocalFile(String fileName, String type1, String type2, String zone, String city, String adliye, String icraDairesi, String hacizGunu, String address){
+    public static void editLocalFile(String fileName, String type1, String type2, String zone, String city, String adliye, String icraDairesi, String hacizGunu, String evliyat) {
         try {
             DSLContext query = DSL.using(Controller.conn, SQLDialect.SQLITE);
             query.update(DSL.table("local_files"))
-                    .set(DSL.field("type_1"),type1.toUpperCase())
-                    .set(DSL.field("type_2"),type2.toUpperCase())
-                    .set(DSL.field("address"),address)
-                    .set(DSL.field("zone"),zone)
-                    .set(DSL.field("city"),city.toUpperCase())
-                    .set(DSL.field("adliye"),adliye.toUpperCase())
-                    .set(DSL.field("icra_dairesi"),icraDairesi.toUpperCase())
-                    .set(DSL.field("haciz_gunu"),hacizGunu.toUpperCase())
-                    .where("file_number='"+fileName+"'")
+                    .set(DSL.field("type_1"), type1.toUpperCase())
+                    .set(DSL.field("type_2"), type2.toUpperCase())
+                    .set(DSL.field("evliyat"), evliyat.toUpperCase())
+                    .set(DSL.field("zone"), zone)
+                    .set(DSL.field("city"), city.toUpperCase())
+                    .set(DSL.field("adliye"), adliye.toUpperCase())
+                    .set(DSL.field("icra_dairesi"), icraDairesi.toUpperCase())
+                    .set(DSL.field("haciz_gunu"), hacizGunu.toUpperCase())
+                    .where("file_number='" + fileName + "'")
                     .execute();
         } catch (Exception ex) {
             Controller.showAlert("İşlem Yapılamadı", ex.getMessage());
@@ -217,7 +221,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     }
 
 
-    public static void addLocalFile(String fileName, String type1, String type2, String zone, String city, String adliye, String icraDairesi, String hacizGunu, String address) {
+    public static void addLocalFile(String fileName, String type1, String type2, String zone, String city, String adliye, String icraDairesi, String hacizGunu, String evliyat) {
         try {
             DSLContext query = DSL.using(Controller.conn, SQLDialect.SQLITE);
             query.insertInto(
@@ -225,13 +229,13 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     DSL.field("file_number"),
                     DSL.field("type_1"),
                     DSL.field("type_2"),
-                    DSL.field("address"),
+                    DSL.field("evliyat"),
                     DSL.field("zone"),
                     DSL.field("city"),
                     DSL.field("adliye"),
                     DSL.field("icra_dairesi"),
                     DSL.field("haciz_gunu")
-            ).values(fileName.toUpperCase(), type1.toUpperCase(), type2.toUpperCase(), address, zone, city.toUpperCase(), adliye.toUpperCase(), icraDairesi.toUpperCase(), hacizGunu.toUpperCase()).returning().fetchOne();
+            ).values(fileName.toUpperCase(), type1.toUpperCase(), type2.toUpperCase(), evliyat.toUpperCase(), zone, city.toUpperCase(), adliye.toUpperCase(), icraDairesi.toUpperCase(), hacizGunu.toUpperCase()).returning().fetchOne();
 
         } catch (Exception ex) {
             Controller.showAlert("İşlem Yapılamadı", ex.getMessage());
@@ -243,9 +247,15 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         System.out.println(event.getEventType());
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        zone.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                refreshList();
+            }
+        });
         refreshList();
         loadAdliyeList();
         loadSehirList();
@@ -253,36 +263,12 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     }
 
     @FXML
-    private void zoneChange() {
-        q.setText("");
-        city.setValue("Şehir");
-        adliye.setValue("Adliye");
-    }
-
-    @FXML
-    private void adliyeChange() {
-        q.setText("");
-        zone.setValue("Bölge");
-        city.setValue("Şehir");
-    }
-
-    @FXML
-    private void cityChange() {
-        q.setText("");
-        zone.setValue("Bölge");
-        adliye.setValue("Adliye");
-    }
-
-    @FXML
-    private void qChanged() {
-        zone.setValue("Bölge");
-        adliye.setValue("Adliye");
-        city.setValue("Şehir");
-    }
-
-    @FXML
     private void searchHandle(ActionEvent event) {
+        refreshList();
+    }
 
+    @FXML
+    private void searchKeyUp(KeyEvent event) {
         refreshList();
     }
 
@@ -304,10 +290,20 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
             Desktop.getDesktop().browse(new URI("http://www.beyazbulutbilisim.com/"));
         }
     }
-    public void loadAllLists(){
+
+    public void loadAllLists() {
         refreshList();
         loadAdliyeList();
         loadSehirList();
+    }
+
+    @FXML
+    private void clearAction() {
+        zone.setValue("Bölge");
+        adliye.setValue("Adliye");
+        city.setValue("Şehir");
+        q.setText("");
+        refreshList();
     }
 
     @FXML

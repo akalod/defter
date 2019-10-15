@@ -14,24 +14,29 @@
    <children>
       <Pane layoutX="24.0" layoutY="99.0" prefHeight="67.0" prefWidth="957.0" styleClass="border">
          <children>
-            <TextField fx:id="q" layoutX="14.0" layoutY="15.0" onKeyPressed="#qChanged" onMouseClicked="#qChanged" prefHeight="37.0" prefWidth="239.0" promptText="Sorgulama metnini giriniz!" styleClass="input" />
-            <ComboBox fx:id="adliye" layoutX="267.0" layoutY="15.0" onMouseClicked="#adliyeChange" prefHeight="37.0" prefWidth="171.0" promptText="Adliye" styleClass="input" />
-            <ComboBox fx:id="zone" layoutX="452.0" layoutY="15.0" onMouseClicked="#zoneChange" prefHeight="37.0" prefWidth="179.0" promptText="Bölge" styleClass="input">
+            <TextField fx:id="q" layoutX="14.0" layoutY="15.0" onKeyPressed="#searchKeyUp"  prefHeight="37.0" prefWidth="192.0" promptText="Sorgulama metnini giriniz!" styleClass="input" />
+            <ComboBox fx:id="adliye" layoutX="215.0" layoutY="15.0" prefHeight="37.0" prefWidth="171.0" promptText="ADLİYE" styleClass="input" />
+            <ComboBox fx:id="zone" layoutX="395.0" layoutY="15.0" prefHeight="37.0" prefWidth="171.0" promptText="BÖLGE" styleClass="input">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Bölge" />
-                        <String fx:value="Karadeniz Bölgesi" />
-                        <String fx:value="Akdeniz Bölgesi" />
-                        <String fx:value="Ege Bölgesi" />
-                        <String fx:value="Doğu Anadolu Bölgesi" />
-                        <String fx:value="İç Anadolu Bölgesi" />
-                        <String fx:value="Güneydoğu Anadolu Bölgesi" />
-                        <String fx:value="Marmara Bölgesi" />
+                        <String fx:value="BÖLGE" />
+                        <String fx:value="KARADENİZ BÖLGESİ" />
+                        <String fx:value="AKDENİZ BÖLGESİ" />
+                        <String fx:value="EGE BÖLGESİ" />
+                        <String fx:value="DOĞU ANADOLU BÖLGESİ" />
+                        <String fx:value="İÇ ANADOLU BÖLGESİ" />
+                        <String fx:value="GÜNEYDOĞU ANADOLU BÖLGESİ" />
+                        <String fx:value="MARMARA BÖLGESİ" />
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox fx:id="city" layoutX="643.0" layoutY="15.0" onMouseClicked="#cityChange" prefHeight="37.0" prefWidth="142.0" promptText="Şehir" styleClass="input" />
+            <ComboBox fx:id="city" layoutX="576.0" layoutY="15.0" onKeyReleased="#searchHandle" onMouseReleased="#searchHandle" prefHeight="37.0" prefWidth="129.0" promptText="Şehir" styleClass="input" />
             <Button defaultButton="true" layoutX="795.0" layoutY="15.0" mnemonicParsing="false" onAction="#searchHandle" prefHeight="37.0" prefWidth="148.0" styleClass="search" text="Ara">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </Button>
+            <Button  layoutX="712.0" layoutY="15.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="37.0" prefWidth="76.0" styleClass="clear" text="Temizle">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
@@ -39,31 +44,34 @@
          </children>
       </Pane>
 
-     <TableView fx:id="queryTable" layoutX="23.0" layoutY="191.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="377.0" prefWidth="957.0" styleClass="grid" onMouseClicked="#showFile">
+     <TableView fx:id="queryTable" layoutX="23.0" layoutY="191.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#showFile" prefHeight="377.0" prefWidth="957.0" styleClass="grid">
         <columns>
-            <TableColumn text="İCRA DAİRESİ" prefWidth="100">
+            <TableColumn prefWidth="100" text="İCRA DAİRESİ">
                 <cellValueFactory><PropertyValueFactory property="icraDairesi" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="DOSYA NO" prefWidth="100">
+            <TableColumn prefWidth="100" text="DOSYA NO">
                 <cellValueFactory><PropertyValueFactory property="fileNumber" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="ALACAKLI" prefWidth="100">
+            <TableColumn prefWidth="100" text="ALACAKLI">
                 <cellValueFactory><PropertyValueFactory property="type1" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="BORÇLU" prefWidth="100">
+            <TableColumn prefWidth="100" text="BORÇLU">
                 <cellValueFactory><PropertyValueFactory property="type2" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="ADLİYE" prefWidth="200">
+            <TableColumn prefWidth="200" text="ADLİYE">
                 <cellValueFactory><PropertyValueFactory property="adliye" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="BÖLGE" prefWidth="140">
+            <TableColumn prefWidth="140" text="BÖLGE">
                 <cellValueFactory><PropertyValueFactory property="zone" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="ŞEHİR" prefWidth="100">
+            <TableColumn prefWidth="100" text="ŞEHİR">
                 <cellValueFactory><PropertyValueFactory property="city" /></cellValueFactory>
             </TableColumn>
-            <TableColumn text="HACİZ GÜNÜ" prefWidth="100">
+            <TableColumn prefWidth="100" text="HACİZ GÜNÜ">
                 <cellValueFactory><PropertyValueFactory property="hacizGunu" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100" text="EVLİYAT">
+                <cellValueFactory><PropertyValueFactory property="evliyat" /></cellValueFactory>
             </TableColumn>
         </columns>
       </TableView>

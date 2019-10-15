@@ -6,18 +6,19 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02bf96fa-cad2-44b5-87b1-44047d7f1e17" name="Default Changelist" comment="-- proje tamamlanma">
-      <change afterPath="$PROJECT_DIR$/macAddress.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/EditPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Views/EditLocalFile.fxml" afterDir="false" />
+    <list default="true" id="02bf96fa-cad2-44b5-87b1-44047d7f1e17" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/defter.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ru/vas7n/va/widgets/MaskField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/defterma.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/defterma.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AddPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EditPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EditPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Searcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/EditLocalFile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/EditLocalFile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Search.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fxmltableview/LFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmltableview/LFile.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -82,9 +83,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
@@ -160,7 +161,11 @@
       <workItem from="1569626055438" duration="3572000" />
       <workItem from="1569660839342" duration="6516000" />
       <workItem from="1570345797603" duration="1745000" />
-      <workItem from="1570349161066" duration="13969000" />
+      <workItem from="1570349161066" duration="14724000" />
+      <workItem from="1570472650883" duration="3049000" />
+      <workItem from="1571166119804" duration="3614000" />
+      <workItem from="1571169768873" duration="3601000" />
+      <workItem from="1571173403447" duration="998000" />
     </task>
     <task id="LOCAL-00001" summary="- jooq eklendi &#10;- bıdı bıdı">
       <created>1560969163051</created>
@@ -197,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569669080773</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="-- düzenleme silve bıdı bıdı eklendi&#10;-- bazı hatalar giderildi&#10;-- mac adresi izini eklendi">
+      <created>1570364557625</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1570364557626</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,7 +233,8 @@
     <MESSAGE value="-- bakkal defterinden avukat dosyalığına döndürüyoruz (uyduruktan basit bişiy olarak ama öyle ciddi bişiy değil)" />
     <MESSAGE value="-- ekleme listeleme tamam" />
     <MESSAGE value="-- proje tamamlanma" />
-    <option name="LAST_COMMIT_MESSAGE" value="-- proje tamamlanma" />
+    <MESSAGE value="-- düzenleme silve bıdı bıdı eklendi&#10;-- bazı hatalar giderildi&#10;-- mac adresi izini eklendi" />
+    <option name="LAST_COMMIT_MESSAGE" value="-- düzenleme silve bıdı bıdı eklendi&#10;-- bazı hatalar giderildi&#10;-- mac adresi izini eklendi" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/defter$Main.ic" NAME="Main Coverage Results" MODIFIED="1560890987586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

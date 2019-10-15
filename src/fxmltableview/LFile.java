@@ -16,13 +16,13 @@ public class LFile {
     private final SimpleStringProperty type1 = new SimpleStringProperty("");
     private final SimpleStringProperty type2 = new SimpleStringProperty("");
     private final SimpleStringProperty fileNumber = new SimpleStringProperty("");
-    private final SimpleStringProperty address = new SimpleStringProperty("");
+    private final SimpleStringProperty evliyat = new SimpleStringProperty("");
 
     public LFile() {
         this("", "", "", "", "", "", "", "", "");
     }
 
-    public LFile(String zone, String city, String adliye, String type1, String type2, String fileNumber, String hacizGunu, String icraDairesi, String address) {
+    public LFile(String zone, String city, String adliye, String type1, String type2, String fileNumber, String hacizGunu, String icraDairesi, String evliyat) {
         setZone(zone);
         setCity(city);
         setAdliye(adliye);
@@ -31,7 +31,7 @@ public class LFile {
         setType1(type1);
         setType2(type2);
         setFileNumber(fileNumber);
-        setAddress(address);
+        setEvliyat(evliyat);
     }
 
     public void setHacizGunu(String par) {
@@ -42,8 +42,8 @@ public class LFile {
         icraDairesi.set(par);
     }
 
-    public void setAddress(String par) {
-        address.set(par);
+    public void setEvliyat(String par) {
+        evliyat.set(par);
     }
 
     public void setZone(String par) {
@@ -107,7 +107,7 @@ public class LFile {
         return LocalDate.parse(hacizGunu.get());
     }
 
-    public String getAddress() {
-        return address.get();
+    public String getEvliyat() {
+        return evliyat.get();
     }
 }
