@@ -30,7 +30,7 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox fx:id="city" layoutX="576.0" layoutY="15.0" onKeyReleased="#searchHandle" onMouseReleased="#searchHandle" prefHeight="37.0" prefWidth="129.0" promptText="Şehir" styleClass="input" />
+            <ComboBox fx:id="city" layoutX="576.0" layoutY="15.0"  prefHeight="37.0" prefWidth="129.0" promptText="Şehir" styleClass="input" />
             <Button defaultButton="true" layoutX="795.0" layoutY="15.0" mnemonicParsing="false" onAction="#searchHandle" prefHeight="37.0" prefWidth="148.0" styleClass="search" text="Ara">
                <font>
                   <Font name="Segoe UI" size="12.0" />

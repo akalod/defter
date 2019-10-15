@@ -6,20 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02bf96fa-cad2-44b5-87b1-44047d7f1e17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/defter.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ru/vas7n/va/widgets/MaskField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/defterma.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/defterma.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="02bf96fa-cad2-44b5-87b1-44047d7f1e17" name="Default Changelist" comment="-- query builderde bir problem var&#10;-- mask inputlar için eklendi&#10;-- son revizelere göre elden geçirildi">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AddPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EditPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EditPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Searcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/EditLocalFile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/EditLocalFile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Search.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxmltableview/LFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmltableview/LFile.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -165,7 +155,7 @@
       <workItem from="1570472650883" duration="3049000" />
       <workItem from="1571166119804" duration="3614000" />
       <workItem from="1571169768873" duration="3601000" />
-      <workItem from="1571173403447" duration="998000" />
+      <workItem from="1571173403447" duration="2204000" />
     </task>
     <task id="LOCAL-00001" summary="- jooq eklendi &#10;- bıdı bıdı">
       <created>1560969163051</created>
@@ -209,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570364557626</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="-- query builderde bir problem var&#10;-- mask inputlar için eklendi&#10;-- son revizelere göre elden geçirildi">
+      <created>1571174503365</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1571174503365</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,7 +231,8 @@
     <MESSAGE value="-- ekleme listeleme tamam" />
     <MESSAGE value="-- proje tamamlanma" />
     <MESSAGE value="-- düzenleme silve bıdı bıdı eklendi&#10;-- bazı hatalar giderildi&#10;-- mac adresi izini eklendi" />
-    <option name="LAST_COMMIT_MESSAGE" value="-- düzenleme silve bıdı bıdı eklendi&#10;-- bazı hatalar giderildi&#10;-- mac adresi izini eklendi" />
+    <MESSAGE value="-- query builderde bir problem var&#10;-- mask inputlar için eklendi&#10;-- son revizelere göre elden geçirildi" />
+    <option name="LAST_COMMIT_MESSAGE" value="-- query builderde bir problem var&#10;-- mask inputlar için eklendi&#10;-- son revizelere göre elden geçirildi" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/defter$Main.ic" NAME="Main Coverage Results" MODIFIED="1560890987586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

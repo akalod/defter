@@ -133,35 +133,45 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                 || adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(adliye.getValue().toString().trim())
                 || q.getText() != null && !q.getText().equals("")
         ) {
-            if (city.getValue() != null && !"ŞEHİR".equalsIgnoreCase(city.getValue().toString().trim())) {
-                dyn.where("city ='" + city.getValue().toString() + "'");
-                wCount++;
-            }
-            if (adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(city.getValue().toString().trim())) {
-                dyn.where("adliye ='" + adliye.getValue().toString() + "'");
-                wCount++;
-            }
-            if (zone.getValue() != null && !"BÖLGE".equalsIgnoreCase(zone.getValue().trim())) {
-                dyn.where("zone ='" + zone.getValue() + "'");
-                wCount++;
-            }
 
             if (q.getText() != null && !q.getText().equals("")) {
+                System.out.println("if");
                 int size = looksUp.length;
                 for (int i = 0; i < size; i++) {
-                    if (wCount > 0 || i > 0) {
-                        if (city.getValue() != null && !"ŞEHİR".equalsIgnoreCase(city.getValue().toString().trim())) {
-                            dyn.where("city ='" + city.getValue().toString() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
-                        } else if (adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(city.getValue().toString().trim())) {
-                            dyn.where("adliye ='" + adliye.getValue().toString() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
-                        } else if (zone.getValue() != null && !"BÖLGE".equalsIgnoreCase(zone.getValue().trim())) {
-                            dyn.where("zone ='" + zone.getValue() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
-                        } else {
+                    if ( i > 0) {
+                        if (zone.getValue() != null && !"BÖLGE".equalsIgnoreCase(zone.getValue().trim())
+                                || city.getValue() != null && !"ŞEHİR".equalsIgnoreCase(city.getValue().toString().trim())
+                                || adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(adliye.getValue().toString().trim())
+                        ) {
+                            if (city.getValue() != null && !"şehir".equalsIgnoreCase(city.getValue().toString().trim())) {
+                                dyn.where("city ='" + city.getValue().toString() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
+                            }
+                            if (adliye.getValue() != null && !"adliye".equalsIgnoreCase(adliye.getValue().toString().trim())) {
+                                dyn.where("adliye ='" + adliye.getValue().toString() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
+                            }
+                            if (zone.getValue() != null && !"bölge".equalsIgnoreCase(zone.getValue().trim())) {
+                                dyn.where("zone ='" + zone.getValue() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
+                            }
+                        }else {
                             dyn.where("1=1").or(looksUp[i] + " like '%" + nQ + "%' ");
                         }
                     } else {
                         dyn.where(looksUp[i] + " like '%" + nQ + "%' ");
                     }
+                }
+            }else {
+                System.out.println("else");
+                if (city.getValue() != null && !"ŞEHİR".equalsIgnoreCase(city.getValue().toString().trim())) {
+                    System.out.println("1");
+                    dyn.where("city ='" + city.getValue().toString() + "'");
+                }
+                if (adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(adliye.getValue().toString().trim())) {
+                    System.out.println("2");
+                    dyn.where("adliye ='" + adliye.getValue().toString() + "'");
+                }
+                if (zone.getValue() != null && !"bölge".equalsIgnoreCase(zone.getValue().trim())) {
+                    System.out.println("3");
+                    dyn.where("zone ='" + zone.getValue() + "'");
                 }
             }
 
@@ -252,6 +262,18 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         zone.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                refreshList();
+            }
+        });
+
+        city.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                refreshList();
+            }
+        });
+
+        adliye.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 refreshList();
             }
