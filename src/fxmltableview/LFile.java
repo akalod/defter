@@ -1,15 +1,16 @@
 package fxmltableview;
 
-import javafx.scene.control.TableView;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class LFile {
 
-    private final SimpleStringProperty zone = new SimpleStringProperty("");
-    private final SimpleStringProperty city = new SimpleStringProperty("");
+    private final SimpleStringProperty zoneName = new SimpleStringProperty("");
+    private final SimpleStringProperty cityName = new SimpleStringProperty("");
+
+    private final SimpleIntegerProperty zone = new SimpleIntegerProperty(0);
+    private final SimpleIntegerProperty city = new SimpleIntegerProperty(0);
     private final SimpleStringProperty adliye = new SimpleStringProperty("");
     private final SimpleStringProperty icraDairesi = new SimpleStringProperty("");
     private final SimpleStringProperty hacizGunu = new SimpleStringProperty("");
@@ -19,10 +20,10 @@ public class LFile {
     private final SimpleStringProperty evliyat = new SimpleStringProperty("");
 
     public LFile() {
-        this("", "", "", "", "", "", "", "", "");
+        this(0, 0, "", "", "", "", "", "", "");
     }
 
-    public LFile(String zone, String city, String adliye, String type1, String type2, String fileNumber, String hacizGunu, String icraDairesi, String evliyat) {
+    public LFile(Integer zone, Integer city, String adliye, String type1, String type2, String fileNumber, String hacizGunu, String icraDairesi, String evliyat) {
         setZone(zone);
         setCity(city);
         setAdliye(adliye);
@@ -46,11 +47,16 @@ public class LFile {
         evliyat.set(par);
     }
 
-    public void setZone(String par) {
+    public void setZone(Integer par) {
         zone.set(par);
+        zoneName.set(Zones.getZone(par).getName());
+    }
+    public String getZone() {
+        return zoneName.get();
     }
 
-    public void setCity(String par) {
+    public void setCity(Integer par) {
+        cityName.set(Cities.getCity(par).getName());
         city.set(par);
     }
 
@@ -72,12 +78,9 @@ public class LFile {
 
 
     public String getCity() {
-        return city.get();
+        return cityName.get();
     }
 
-    public String getZone() {
-        return zone.get();
-    }
 
     public String getFileNumber() {
         return fileNumber.get();
@@ -109,5 +112,13 @@ public class LFile {
 
     public String getEvliyat() {
         return evliyat.get();
+    }
+
+    public Integer getZoneId(){
+        return zone.get();
+    }
+
+    public Integer getCityId(){
+        return city.get();
     }
 }

@@ -24,20 +24,8 @@
       <Label layoutX="77.0" layoutY="147.0" text="BORÇLU" />
       <TextField fx:id="adliye" layoutX="137.0" layoutY="182.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <Label layoutX="84.0" layoutY="223.0" text="BÖLGE" />
-      <ChoiceBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="MARMARA BÖLGESİ">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="KARADENİZ BÖLGESİ" />
-               <String fx:value="AKDENİZ BÖLGESİ" />
-               <String fx:value="EGE BÖLGESİ" />
-               <String fx:value="DOĞU ANADOLU BÖLGESİ" />
-               <String fx:value="İÇ ANADOLU BÖLGESİ" />
-               <String fx:value="GÜNEYDOĞU ANADOLU BÖLGESİ" />
-               <String fx:value="MARMARA BÖLGESİ" />
-            </FXCollections>
-         </items>
-      </ChoiceBox>
-      <TextField fx:id="city" layoutX="136.0" layoutY="257.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
+      <ComboBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="MARMARA BÖLGESİ" />
+      <ComboBox fx:id="city" layoutX="136.0" layoutY="257.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <Label layoutX="89.0" layoutY="261.0" text="ŞEHİR" />
       <Label layoutX="53.0" layoutY="304.0" text="HACİZ GÜNÜ" />
       <ChoiceBox fx:id="haciz_gunu" layoutX="135.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="PAZARTESİ">

@@ -67,7 +67,7 @@ public class Controller {
                     s.execute("INSERT INTO settings (id,key,value) VALUES(1,'admin','admin')");
                 } else {
                     /* bu kısım bir kaç avukat arkadaş için revize edilerek başlatılmıştır */
-                    s.execute("CREATE TABLE local_files (id integer PRIMARY KEY, file_number text NOT NULL UNIQUE , type_1 text, type_2 text,evliyat text,zone text,city text,icra_dairesi text,haciz_gunu text,adliye text ) ;");
+                    s.execute("CREATE TABLE local_files (id integer PRIMARY KEY, file_number text NOT NULL UNIQUE , type_1 text, type_2 text,evliyat text,zone integer,city integer,icra_dairesi text,haciz_gunu text,adliye text ) ;");
                     s.execute("CREATE TABLE mac_allow (id integer PRIMARY KEY, mac text NOT NULL UNIQUE ) ;");
                     loadMacFromFile();
                 }
@@ -105,7 +105,15 @@ public class Controller {
     }
 
     public static void showAlert(String Title, String notice) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        showAlert(Title, notice, Alert.AlertType.ERROR);
+    }
+
+    public static void showWarning(String Title, String notice) {
+        showAlert(Title, notice, Alert.AlertType.WARNING);
+    }
+
+    public static void showAlert(String Title, String notice, Alert.AlertType errorType) {
+        Alert alert = new Alert(errorType);
         alert.setHeaderText(Title);
         alert.setContentText(notice);
         alert.showAndWait();

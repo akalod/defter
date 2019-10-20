@@ -9,34 +9,20 @@
 <?import javafx.collections.*?>
 <?import fxmltableview.*?>
 <?import javafx.collections.FXCollections ?>
+<?import javafx.stage.Screen?>
 
-<AnchorPane prefHeight="595.0" prefWidth="1000.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Searcher">
+<AnchorPane prefHeight="${screen.visualBounds.height-40}" prefWidth="${screen.visualBounds.width-10}" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Searcher">
+    <fx:define>
+        <Screen fx:factory="getPrimary" fx:id="screen"/>
+    </fx:define>
    <children>
-      <Pane layoutX="24.0" layoutY="99.0" prefHeight="67.0" prefWidth="957.0" styleClass="border">
+       <Pane layoutX="20.0" layoutY="99.0" prefHeight="67.0" prefWidth="957.0" styleClass="border" fx:id="queryBorder">
          <children>
-            <TextField fx:id="q" layoutX="14.0" layoutY="15.0" onKeyPressed="#searchKeyUp"  prefHeight="37.0" prefWidth="192.0" promptText="Sorgulama metnini giriniz!" styleClass="input" />
-            <ComboBox fx:id="adliye" layoutX="215.0" layoutY="15.0" prefHeight="37.0" prefWidth="171.0" promptText="ADLİYE" styleClass="input" />
-            <ComboBox fx:id="zone" layoutX="395.0" layoutY="15.0" prefHeight="37.0" prefWidth="171.0" promptText="BÖLGE" styleClass="input">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="BÖLGE" />
-                        <String fx:value="KARADENİZ BÖLGESİ" />
-                        <String fx:value="AKDENİZ BÖLGESİ" />
-                        <String fx:value="EGE BÖLGESİ" />
-                        <String fx:value="DOĞU ANADOLU BÖLGESİ" />
-                        <String fx:value="İÇ ANADOLU BÖLGESİ" />
-                        <String fx:value="GÜNEYDOĞU ANADOLU BÖLGESİ" />
-                        <String fx:value="MARMARA BÖLGESİ" />
-                    </FXCollections>
-                </items>
-            </ComboBox>
-            <ComboBox fx:id="city" layoutX="576.0" layoutY="15.0"  prefHeight="37.0" prefWidth="129.0" promptText="Şehir" styleClass="input" />
-            <Button defaultButton="true" layoutX="795.0" layoutY="15.0" mnemonicParsing="false" onAction="#searchHandle" prefHeight="37.0" prefWidth="148.0" styleClass="search" text="Ara">
-               <font>
-                  <Font name="Segoe UI" size="12.0" />
-               </font>
-            </Button>
-            <Button  layoutX="712.0" layoutY="15.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="37.0" prefWidth="76.0" styleClass="clear" text="Temizle">
+            <TextField fx:id="q" layoutX="10.0" layoutY="15.0" onKeyPressed="#searchKeyUp" prefHeight="37.0" prefWidth="200.0" promptText="Sorgulama metnini giriniz!" styleClass="input" />
+            <ComboBox fx:id="adliye" layoutX="220.0" layoutY="15.0" prefHeight="37.0" prefWidth="200.0" promptText="ADLİYE" styleClass="input" />
+            <ComboBox fx:id="zone" layoutX="430.0" layoutY="15.0" prefHeight="37.0" prefWidth="250.0" promptText="BÖLGE" styleClass="input" />
+            <ComboBox fx:id="city" layoutX="690.0" layoutY="15.0" prefHeight="37.0" prefWidth="150.0" promptText="ŞEHİR" styleClass="input" />
+            <Button fx:id="cleanButton" layoutX="795.0" layoutY="15.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="37.0" prefWidth="100"  text="Temizle" styleClass="search">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
@@ -44,7 +30,7 @@
          </children>
       </Pane>
 
-     <TableView fx:id="queryTable" layoutX="23.0" layoutY="191.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#showFile" prefHeight="377.0" prefWidth="957.0" styleClass="grid">
+     <TableView fx:id="queryTable" layoutX="20" layoutY="191.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#showFile" minHeight="377.0" minWidth="957.0" prefWidth="${screen.visualBounds.width-40}"  prefHeight="${screen.visualBounds.height-250}" styleClass="grid">
         <columns>
             <TableColumn prefWidth="100" text="İCRA DAİRESİ">
                 <cellValueFactory><PropertyValueFactory property="icraDairesi" /></cellValueFactory>
@@ -75,7 +61,7 @@
             </TableColumn>
         </columns>
       </TableView>
-      <Button layoutX="832.0" layoutY="28.0" mnemonicParsing="false" onAction="#addPageAction" prefHeight="47.0" prefWidth="148.0" styleClass="add" text="Yeni Dosya Ekle">
+      <Button fx:id="newFileButton" layoutX="832.0" layoutY="28.0" mnemonicParsing="false" onAction="#addPageAction" prefHeight="47.0" prefWidth="148.0" styleClass="add" text="Yeni Dosya Ekle">
          <font>
             <Font name="Segoe UI" size="12.0" />
          </font>
@@ -85,5 +71,6 @@
             <Image url="@../assets/logo.jpg" />
          </image>
       </ImageView>
+      <Text fx:id="textResult" fontSmoothingType="LCD" layoutX="0.0" layoutY="100.0" text="sonuc" textAlignment="RIGHT" wrappingWidth="${screen.visualBounds.width-20}" />
    </children>
 </AnchorPane>

@@ -1,8 +1,13 @@
+import fxmltableview.Cities;
+import fxmltableview.City;
+import fxmltableview.Zone;
+import fxmltableview.Zones;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,7 +17,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import ru.vas7n.va.widgets.MaskField;
 
-public class AddPage implements EventHandler<ActionEvent> {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AddPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     MaskField file_number;
     @FXML
@@ -20,7 +28,7 @@ public class AddPage implements EventHandler<ActionEvent> {
     @FXML
     TextField type_2;
     @FXML
-    ChoiceBox zone;
+    private ComboBox<Zone> zone;
     @FXML
     TextField icra_dairesi;
     @FXML
@@ -28,7 +36,7 @@ public class AddPage implements EventHandler<ActionEvent> {
     @FXML
     ChoiceBox haciz_gunu;
     @FXML
-    TextField city;
+    private ComboBox<City> city;
     @FXML
     TextArea evliyat;
 
@@ -59,12 +67,25 @@ public class AddPage implements EventHandler<ActionEvent> {
     @FXML
     private void addAction(ActionEvent event) {
 
+        String localFileName = file_number.getText().toUpperCase().replaceAll("_","");
+
+        if (localFileName.equals("/")
+                || city.getValue().getId().equals(0)
+                || type_1.getText().equals("")
+                || type_2.getText().equals("")
+                || adliye.getText().equals("")
+                || icra_dairesi.getText().equals("")
+                || zone.getValue().getId().equals(0)
+        ) {
+            Controller.showWarning("İşlem Yapılamadı", "Lütfen gerekli alanları doldurun");
+            return;
+        }
         Searcher.addLocalFile(
-                file_number.getText(),
+                localFileName,
                 type_1.getText(),
                 type_2.getText(),
-                zone.getValue().toString(),
-                city.getText(),
+                zone.getValue(),
+                city.getValue(),
                 adliye.getText(),
                 icra_dairesi.getText(),
                 haciz_gunu.getValue().toString(),
@@ -97,5 +118,21 @@ public class AddPage implements EventHandler<ActionEvent> {
             file_number.endOfNextWord();
             file_number.positionCaret(file_number.getCaretPosition());
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        zone.getItems().addAll(Zones.getAll());
+        zone.setValue(Zones.getZone(1));
+        city.getItems().addAll(Cities.getByZone(zone.getValue().getId()));
+        city.setValue(Cities.getFirst());
+
+        zone.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                city.getItems().clear();
+                city.getItems().addAll(Cities.getByZone(zone.getValue().getId()));
+            }
+        });
     }
 }

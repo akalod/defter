@@ -1,4 +1,4 @@
-import fxmltableview.LFile;
+import fxmltableview.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,12 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.jooq.meta.derby.sys.Sys;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EditPage implements EventHandler<ActionEvent>, Initializable {
@@ -27,7 +23,7 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     TextField type_2;
     @FXML
-    ChoiceBox zone;
+    private ComboBox<Zone> zone;
     @FXML
     TextField icra_dairesi;
     @FXML
@@ -35,7 +31,7 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     ChoiceBox haciz_gunu;
     @FXML
-    TextField city;
+    private ComboBox<City> city;
     @FXML
     TextArea evliyat;
 
@@ -73,20 +69,34 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        zone.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                city.getItems().clear();
+                city.getItems().addAll(Cities.getByZone(zone.getValue().getId()));
+            }
+        });
         LFile lData = Main.remoteData;
-        city.setText(lData.getCity());
         type_1.setText(lData.getType1());
         type_2.setText(lData.getType2());
         file_number.setText(lData.getFileNumber());
         adliye.setText(lData.getAdliye());
         evliyat.setText(lData.getEvliyat());
-        zone.setValue(lData.getZone());
+        zone.getItems().addAll(Zones.getAll());
+        zone.setValue(Zones.getFirst());
+        System.out.println(lData.getZoneId());
+        if (lData.getZoneId() != 0) {
+            zone.setValue(Zones.getZone(lData.getZoneId()));
+        }
+        if(lData.getCityId() !=0) {
+           city.getItems().setAll(Cities.getByZone(lData.getZoneId()));
+           city.setValue(Cities.getCity(lData.getCityId()));
+        }
         haciz_gunu.setValue(lData.getHacizGunu());
         icra_dairesi.setText(lData.getIcraDairesi());
     }
 
     @FXML
-    private void removeAction(){
+    private void removeAction() {
         Searcher.removeFile(file_number.getText());
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
@@ -94,13 +104,13 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
     }
 
     @FXML
-    private void editAction(){
+    private void editAction() {
         Searcher.editLocalFile(
                 file_number.getText(),
                 type_1.getText(),
                 type_2.getText(),
-                zone.getValue().toString(),
-                city.getText(),
+                zone.getValue(),
+                city.getValue(),
                 adliye.getText(),
                 icra_dairesi.getText(),
                 haciz_gunu.getValue().toString(),

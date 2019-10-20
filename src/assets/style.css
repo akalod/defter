@@ -89,3 +89,12 @@
     -fx-border-color: #50ad55;
     -fx-padding: 0;
 }
+
+.have-result {
+   -fx-fill:#1633ff;
+   -fx-font-weight: bold;
+}
+
+.no-result {
+ -fx-fill:#ff0000;
+}
