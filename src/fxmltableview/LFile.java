@@ -7,6 +7,7 @@ import java.time.LocalDate;
 public class LFile {
 
     private final SimpleStringProperty zoneName = new SimpleStringProperty("");
+    private final SimpleIntegerProperty id = new SimpleIntegerProperty(0);
     private final SimpleStringProperty cityName = new SimpleStringProperty("");
 
     private final SimpleIntegerProperty zone = new SimpleIntegerProperty(0);
@@ -20,11 +21,12 @@ public class LFile {
     private final SimpleStringProperty evliyat = new SimpleStringProperty("");
 
     public LFile() {
-        this(0, 0, "", "", "", "", "", "", "");
+        this(0,0, 0, "", "", "", "", "", "", "");
     }
 
-    public LFile(Integer zone, Integer city, String adliye, String type1, String type2, String fileNumber, String hacizGunu, String icraDairesi, String evliyat) {
+    public LFile(Integer id,Integer zone, Integer city, String adliye, String type1, String type2, String fileNumber, String hacizGunu, String icraDairesi, String evliyat) {
         setZone(zone);
+        setId(id);
         setCity(city);
         setAdliye(adliye);
         setHacizGunu(hacizGunu);
@@ -33,6 +35,14 @@ public class LFile {
         setType2(type2);
         setFileNumber(fileNumber);
         setEvliyat(evliyat);
+    }
+
+    public void setId(Integer par){
+        id.set(par);
+    }
+
+    public Integer getId(){
+        return  id.get();
     }
 
     public void setHacizGunu(String par) {

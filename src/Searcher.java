@@ -1,4 +1,5 @@
 import fxmltableview.*;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,10 +12,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
@@ -33,10 +36,11 @@ import java.util.ResourceBundle;
 public class Searcher implements EventHandler<ActionEvent>, Initializable {
     public Button newFileButton;
     public Pane queryBorder;
-    public Button searchButton;
     public Button cleanButton;
     private Date lastClickTime;
     private LFile temp;
+
+    private Stage mainScene;
 
     @FXML
     private TableView<LFile> queryTable;
@@ -57,26 +61,119 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     @FXML
     private Text textResult;
 
-    public static Rectangle2D bounds;
+    public void selectCityFromAnother(KeyEvent event) {
+        if (event.getCode() == KeyCode.F4) {
+            event.consume();
+            Main.searchLayer.city.requestFocus();
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        zone.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                refreshList();
+                loadSehirList();
+            }
+        });
+
+        city.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                refreshList();
+            }
+        });
+
+        adliye.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                refreshList();
+            }
+        });
+
+        city.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.F4) {
+                event.consume();
+            }
+        });
+
+        zone.addEventFilter(KeyEvent.KEY_PRESSED, this::selectCityFromAnother);
+        adliye.addEventFilter(KeyEvent.KEY_PRESSED, this::selectCityFromAnother);
+
+        zone.getItems().clear();
+        zone.getItems().addAll(Zones.getAll());
+
+        refreshList();
+        loadAdliyeList();
+        loadSehirList();
+
+        Main.searchLayer = this;
+    }
+
+    private void changeSize(Double x, Double y) {
+
+        if (!y.isNaN() && y.toString() != null) {
+            Main.searchLayer.textResult.setLayoutY(y - 45);
+            Main.searchLayer.queryTable.setPrefHeight(y - 250);
+        }
+        Main.searchLayer.newFileButton.setLayoutX(x - 188);
+        Main.searchLayer.cleanButton.setLayoutX(x - 170);
+        Main.searchLayer.textResult.setWrappingWidth(x - 40);
+        Main.searchLayer.queryBorder.setPrefWidth(x - 60);
+        Main.searchLayer.queryTable.setPrefWidth(x - 60);
+
+    }
 
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("Views/Search.fxml"));
+        mainScene = primaryStage;
         primaryStage.setTitle("Dosya Takip Programı");
 
         Image image = new Image("/assets/notebook.png");
         primaryStage.getIcons().add(image);
 
-        Scene screen = new Scene(root);
+        Scene scene = new Scene(root);
 
 
+        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->
+                changeSize(mainScene.getWidth(), mainScene.getHeight());
 
+        mainScene.widthProperty().addListener(stageSizeListener);
+        mainScene.heightProperty().addListener(stageSizeListener);
 
-        primaryStage.setResizable(false);
-        primaryStage.setMaximized(true);
-        primaryStage.setScene(screen);
-        primaryStage.show();
+        scene.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (event.getCode() == KeyCode.F1) {
+                Main.searchLayer.q.requestFocus();
+            } else if (event.getCode() == KeyCode.F2) {
+                Main.searchLayer.adliye.requestFocus();
+            } else if (event.getCode() == KeyCode.F3) {
+                Main.searchLayer.zone.requestFocus();
+            } else if (event.getCode() == KeyCode.F4) {
+                Main.searchLayer.city.requestFocus();
+            } else if (event.getCode() == KeyCode.F5) {
+                Main.searchLayer.clearAction();
+            } else if (event.getCode() == KeyCode.F9) {
+                Main.searchLayer.queryTable.requestFocus();
+                Main.searchLayer.queryTable.getSelectionModel().select(0);
+                Main.searchLayer.queryTable.getFocusModel().focus(0);
+            } else if (event.getCode() == KeyCode.F12) {
+                Main.searchLayer.addPageAction();
+            } else if (event.getCode() == KeyCode.ENTER) {
+                if (Main.searchLayer.queryTable.isFocused()) {
+                    Main.searchLayer.showFile(true);
+                }
+            } else {
+                System.out.println(event.getCode());
+            }
 
+        });
+        mainScene.setMinWidth(1010);
+        mainScene.setMinHeight(640);
+        mainScene.sizeToScene();
+        mainScene.setResizable(true);
+        mainScene.setMaximized(false);
+        mainScene.setScene(scene);
+        mainScene.show();
 
     }
 
@@ -124,7 +221,6 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
 
         SelectSeekStep1<Record, Object> ra;
         String[] looksUp = new String[5];
-        Integer wCount = 0;
 
         looksUp[0] = "type_1";
         looksUp[1] = "type_2";
@@ -195,6 +291,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         for (Record rec :
                 ra.fetch()) {
             data.add(new LFile(
+                    Integer.parseInt(rec.get("id").toString()),
                     Integer.parseInt(rec.get("zone").toString()),
                     Integer.parseInt(rec.get("city").toString()),
                     rec.get("adliye").toString(),
@@ -217,18 +314,19 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
 
     }
 
-    public static void removeFile(String fileName) {
+    public static void removeFile(Integer id) {
         try {
             DSLContext query = DSL.using(Controller.conn, SQLDialect.SQLITE);
             query.deleteFrom(DSL.table("local_files"))
-                    .where("file_number='" + fileName + "'").returning().fetchOne();
+                    .where("id='" + id + "'").returning().fetchOne();
         } catch (Exception ex) {
             Controller.showAlert("İşlem Yapılamadı", ex.getMessage());
         }
     }
 
-    public static void editLocalFile(String fileName, String type1, String type2, Zone zone, City city, String adliye, String icraDairesi, String hacizGunu, String evliyat) {
+    public static void editLocalFile(Integer id, String fileName, String type1, String type2, Zone zone, City city, String adliye, String icraDairesi, String hacizGunu, String evliyat) {
         try {
+            String localFileName = fileName.toUpperCase().replaceAll("_", "");
             DSLContext query = DSL.using(Controller.conn, SQLDialect.SQLITE);
             query.update(DSL.table("local_files"))
                     .set(DSL.field("type_1"), type1.toUpperCase())
@@ -239,7 +337,8 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     .set(DSL.field("adliye"), adliye.toUpperCase())
                     .set(DSL.field("icra_dairesi"), icraDairesi.toUpperCase())
                     .set(DSL.field("haciz_gunu"), hacizGunu.toUpperCase())
-                    .where("file_number='" + fileName + "'")
+                    .set(DSL.field("file_number"), localFileName)
+                    .where("id='" + id + "'")
                     .execute();
         } catch (Exception ex) {
             Controller.showAlert("İşlem Yapılamadı", ex.getMessage());
@@ -272,59 +371,13 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         System.out.println(event.getEventType());
     }
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        zone.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                refreshList();
-                loadSehirList();
-            }
-        });
-
-        city.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                refreshList();
-            }
-        });
-
-        adliye.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                refreshList();
-            }
-        });
-
-        zone.getItems().clear();
-        zone.getItems().addAll(Zones.getAll());
-        Screen monitorScreen = Screen.getPrimary();
-        bounds = monitorScreen.getVisualBounds();
-
-        textResult.setY(bounds.getHeight()-130);
-        newFileButton.setLayoutX(bounds.getWidth()-168);
-        queryBorder.setPrefWidth(bounds.getWidth()-40);
-       // searchButton.setLayoutX(bounds.getWidth()-198);
-        cleanButton.setLayoutX(bounds.getWidth()-150);
-
-        refreshList();
-        loadAdliyeList();
-        loadSehirList();
-        Main.searchLayer = this;
-    }
-
-    @FXML
-    private void searchHandle(ActionEvent event) {
-        refreshList();
-    }
-
     @FXML
     private void searchKeyUp(KeyEvent event) {
         refreshList();
     }
 
     @FXML
-    private void addPageAction(ActionEvent event) {
-        System.out.println(event.getSource());
+    private void addPageAction() {
         Main.addPageLayer = new AddPage();
         refreshList();
         try {
@@ -348,18 +401,31 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     }
 
     @FXML
-    private void clearAction() {
+    private Runnable clearAction() {
         zone.setValue(Zones.getFirst());
         adliye.setValue("ADLİYE");
         city.setValue(Cities.getFirst());
         q.setText("");
         refreshList();
+        return null;
     }
 
-    @FXML
-    private void showFile() {
+    public void showEditPage(LFile data) {
+        try {
+            EditPage editPage = new EditPage();
+            Main.remoteData = data;
+            editPage.start();
+        } catch (Exception e) {
+            System.out.println("::" + e.toString());
+        }
+    }
+
+    public void showFile(boolean isFast) {
         LFile row = queryTable.getSelectionModel().getSelectedItem();
         if (row == null) return;
+        if (isFast) {
+            showEditPage(row);
+        }
         if (row != temp) {
             temp = row;
             lastClickTime = new Date();
@@ -367,17 +433,15 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
             Date now = new Date();
             long diff = now.getTime() - lastClickTime.getTime();
             if (diff < 300) { //another click registered in 300 millis
-                try {
-                    EditPage editPage = new EditPage();
-                    Main.remoteData = row;
-                    editPage.start();
-                } catch (Exception e) {
-                    System.out.println("::" + e.toString());
-                }
-
+                showEditPage(row);
             } else {
                 lastClickTime = new Date();
             }
         }
+    }
+
+    @FXML
+    private void showFile() {
+        showFile(false);
     }
 }

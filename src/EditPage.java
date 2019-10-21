@@ -8,7 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import ru.vas7n.va.widgets.MaskField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +20,7 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     Button cancel;
     @FXML
-    TextField file_number;
+    MaskField file_number;
     @FXML
     TextField type_1;
     @FXML
@@ -29,11 +32,14 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     TextField adliye;
     @FXML
-    ChoiceBox haciz_gunu;
+    ComboBox haciz_gunu;
     @FXML
     private ComboBox<City> city;
     @FXML
-    TextArea evliyat;
+    TextField evliyat;
+
+    @FXML
+    Integer id;
 
     private Stage stage;
 
@@ -50,6 +56,11 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
 
         Scene screen = new Scene(root);
 
+        stage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+            if (KeyCode.ESCAPE == event.getCode()) {
+                stage.close();
+            }
+        });
         stage.setResizable(false);
         stage.setScene(screen);
         stage.show();
@@ -76,6 +87,7 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
             }
         });
         LFile lData = Main.remoteData;
+
         type_1.setText(lData.getType1());
         type_2.setText(lData.getType2());
         file_number.setText(lData.getFileNumber());
@@ -83,7 +95,7 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
         evliyat.setText(lData.getEvliyat());
         zone.getItems().addAll(Zones.getAll());
         zone.setValue(Zones.getFirst());
-        System.out.println(lData.getZoneId());
+        id = lData.getId();
         if (lData.getZoneId() != 0) {
             zone.setValue(Zones.getZone(lData.getZoneId()));
         }
@@ -97,7 +109,7 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
 
     @FXML
     private void removeAction() {
-        Searcher.removeFile(file_number.getText());
+        Searcher.removeFile(id);
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
         Main.searchLayer.loadAllLists();
@@ -106,6 +118,7 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     private void editAction() {
         Searcher.editLocalFile(
+                id,
                 file_number.getText(),
                 type_1.getText(),
                 type_2.getText(),

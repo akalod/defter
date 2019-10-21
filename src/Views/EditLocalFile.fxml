@@ -6,29 +6,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.FXCollections ?>
+<?import ru.vas7n.va.widgets.MaskField?>
 
 <AnchorPane prefHeight="487.0" prefWidth="380.0" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EditPage">
    <children>
-      <Button fx:id="closeButton" defaultButton="true" layoutX="241.0" layoutY="428.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="103.0" styleClass="add" text="Güncelle" onAction="#editAction">
+      <Button fx:id="closeButton" defaultButton="true" layoutX="241.0" layoutY="428.0" mnemonicParsing="false" onAction="#editAction" prefHeight="17.0" prefWidth="103.0" styleClass="add" text="Güncelle">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
       </Button>
       <TextField fx:id="icra_dairesi" layoutX="136.0" layoutY="32.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <Label layoutX="58.0" layoutY="33.0" text="İCRA DAİRESİ" textAlignment="JUSTIFY" />
-      <TextField fx:id="file_number" disable="true" layoutX="136.0" layoutY="69.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <Label layoutX="66.0" layoutY="73.0" text="DOSYA NO" textAlignment="JUSTIFY" />
+      <MaskField mask="DDDD/DDDDDDDDDD" fx:id="file_number"   layoutX="136.0" layoutY="69.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <TextField fx:id="type_1" layoutX="136.0" layoutY="106.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <Label layoutX="73.0" layoutY="110.0" text="ALACAKLI" />
       <TextField fx:id="type_2" layoutX="136.0" layoutY="143.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <Label layoutX="77.0" layoutY="147.0" text="BORÇLU" />
-      <TextField fx:id="adliye" layoutX="137.0" layoutY="182.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <Label layoutX="84.0" layoutY="223.0" text="BÖLGE" />
+      <TextField fx:id="adliye" layoutX="136.0" layoutY="182.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <ComboBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <ComboBox fx:id="city" layoutX="136.0" layoutY="257.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <Label layoutX="89.0" layoutY="261.0" text="ŞEHİR" />
-      <Label layoutX="53.0" layoutY="304.0" text="HACİZ GÜNÜ" />
-      <ChoiceBox fx:id="haciz_gunu" layoutX="135.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input">
+      <ComboBox fx:id="haciz_gunu" layoutX="136.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="PAZARTESİ" />
@@ -39,16 +33,23 @@
                <String fx:value="DİĞER" />
             </FXCollections>
          </items>
-      </ChoiceBox>
-      <Label layoutX="85.0" layoutY="187.0" text="ADLİYE" />
-      <TextArea fx:id="evliyat" layoutX="137.0" layoutY="343.0" prefHeight="75.0" prefWidth="209.0" styleClass="input" />
-      <Label layoutX="86.0" layoutY="343.0" text="EVLİYAT" />
+      </ComboBox>
+      <TextField fx:id="evliyat" layoutX="136.0" layoutY="343.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
+      <Label layoutX="58.0" layoutY="33.0" prefWidth="71.0" text="İCRA DAİRESİ" alignment="CENTER_RIGHT" />
+      <Label layoutX="58.0" layoutY="73.0" prefWidth="71.0" text="DOSYA NO" alignment="CENTER_RIGHT" />
+      <Label layoutX="58.0" layoutY="110.0" prefWidth="71.0" text="ALACAKLI" alignment="CENTER_RIGHT" />
+      <Label layoutX="58.0" layoutY="147.0" prefWidth="71.0" text="BORÇLU" alignment="CENTER_RIGHT" />
+      <Label layoutX="58.0" layoutY="223.0" prefWidth="71.0" text="BÖLGE" alignment="CENTER_RIGHT" />
+      <Label layoutX="58.0" layoutY="261.0" prefHeight="17.0" prefWidth="71.0" text="ŞEHİR" alignment="CENTER_RIGHT" />
+      <Label layoutX="58.0" layoutY="304.0" prefHeight="17.0" prefWidth="71.0" text="HACİZ GÜNÜ" alignment="CENTER_RIGHT" />
+      <Label layoutX="58.0" layoutY="187.0" prefWidth="71.0" text="ADLİYE" alignment="CENTER_RIGHT" />
+      <Label layoutX="58.0" layoutY="350.0" prefHeight="17.0" prefWidth="71.0" text="EVVELİYAT" alignment="CENTER_RIGHT" />
       <Button fx:id="cancel" layoutX="137.0" layoutY="428.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="31.0" prefWidth="90.0" text="İptal">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="32.0" layoutY="428.0" mnemonicParsing="false" onAction="#removeAction"  styleClass="remove" prefHeight="31.0" prefWidth="90.0" text="SİL">
+      <Button layoutX="32.0" layoutY="428.0" mnemonicParsing="false" onAction="#removeAction" prefHeight="31.0" prefWidth="90.0" styleClass="remove" text="SİL">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>

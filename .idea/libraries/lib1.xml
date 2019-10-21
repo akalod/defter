@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/javaws.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/rt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/jfxswt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/jsse.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/charsets.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/jce.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/jfr.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/management-agent.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defterma/runtime/lib/resources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

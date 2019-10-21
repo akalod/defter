@@ -34,11 +34,11 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     TextField adliye;
     @FXML
-    ChoiceBox haciz_gunu;
+    ComboBox haciz_gunu;
     @FXML
     private ComboBox<City> city;
     @FXML
-    TextArea evliyat;
+    TextField evliyat;
 
     private Stage primaryStage;
 
@@ -53,7 +53,11 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
 
         Scene screen = new Scene(root);
 
-
+        primaryStage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+            if (KeyCode.ESCAPE == event.getCode()) {
+                primaryStage.close();
+            }
+        });
         primaryStage.setResizable(false);
         primaryStage.setScene(screen);
         primaryStage.show();

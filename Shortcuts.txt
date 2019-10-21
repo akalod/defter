@@ -1,0 +1,8 @@
+F1 -> Query'i focus
+F2 -> Adliye focus
+F3 -> Bölge focus
+F4 -> Şehir focus
+
+F5 -> Sonuçları temizle
+F9 -> Sonuç tablosu focus
+F12 -> Yeni Dosya Ekle

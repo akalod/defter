@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="defterma">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/jooq-3.11.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/sqlite-jdbc-3.27.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/jooq-meta-3.11.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/defter.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/jooq-codegen-3.11.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
