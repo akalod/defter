@@ -265,20 +265,20 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     }
                 }
             } else {
+                System.out.println("else");
                 if (city.getValue() != null && city.getValue().getId() != 0) {
-                    System.out.println("1");
                     dyn.where("city ='" + city.getValue().getId() + "'");
                 }
-                if (adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(adliye.getValue().toString().trim())) {
-                    System.out.println("2");
-                    dyn.where("adliye ='" + adliye.getValue().toString() + "'");
+                if (adliye.getValue() != null && !adliye.getValue().toString().trim().equals("ADLİYE")) {
+                    dyn.where("adliye ='" + adliye.getValue().toString().trim() + "'");
                 }
-                if (zone.getValue().getId() != 0) {
+                if (zone.getValue()!=null && zone.getValue().getId()!=0) {
                     dyn.where("zone ='" + zone.getValue().getId() + "'");
                 }
             }
 
             ra = dyn.orderBy(DSL.field("file_number"));
+            System.out.println(ra.toString());
 
 
         } else {
