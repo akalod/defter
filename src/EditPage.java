@@ -84,6 +84,7 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
             if (newSelection != null) {
                 city.getItems().clear();
                 city.getItems().addAll(Cities.getByZone(zone.getValue().getId()));
+                city.setValue(Cities.getFirst());
             }
         });
         LFile lData = Main.remoteData;

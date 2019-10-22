@@ -99,9 +99,14 @@
 
 .have-result {
    -fx-fill:#1633ff;
-   -fx-font-weight: bold;
 }
 
 .no-result {
- -fx-fill:#ff0000;
+   -fx-fill:#ff0000;
+   -fx-font-weight: bold;
+}
+
+* {
+-fx-font-family: "Tahoma";
+-fx-font-size:12;
 }

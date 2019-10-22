@@ -27,15 +27,17 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SocketException {
 
-        final Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
-        while (((Enumeration) e).hasMoreElements()) {
-            final byte[] mac = e.nextElement().getHardwareAddress();
-            if (mac != null) {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < mac.length; i++)
-                    sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
-                System.out.println("MAC Adress:" + sb.toString());
-                MACAddress = sb.toString();
+        if(Controller.FileLister) {
+            final Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
+            while (((Enumeration) e).hasMoreElements()) {
+                final byte[] mac = e.nextElement().getHardwareAddress();
+                if (mac != null) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < mac.length; i++)
+                        sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+                    System.out.println("MAC Adress:" + sb.toString());
+                    MACAddress = sb.toString();
+                }
             }
         }
         launch(args);

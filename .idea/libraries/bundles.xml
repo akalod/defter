@@ -1,12 +1,6 @@
 <component name="libraryTable">
   <library name="bundles">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/jooq-codegen-3.11.12.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/jooq-meta-3.11.12.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/jooq-3.11.12.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/sqlite-jdbc-3.27.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/defterma/bundles/defter.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

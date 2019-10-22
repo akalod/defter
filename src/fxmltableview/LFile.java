@@ -65,6 +65,16 @@ public class LFile {
         return zoneName.get();
     }
 
+    public void setCity(Integer id, String name){
+        cityName.set(name);
+        city.set(id);
+    }
+
+    public void setZone(Integer id, String name){
+        zoneName.set(name);
+        zone.set(id);
+    }
+
     public void setCity(Integer par) {
         cityName.set(Cities.getCity(par).getName());
         city.set(par);

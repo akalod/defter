@@ -136,6 +136,7 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
             if (newSelection != null) {
                 city.getItems().clear();
                 city.getItems().addAll(Cities.getByZone(zone.getValue().getId()));
+                city.setValue(Cities.getFirst());
             }
         });
     }

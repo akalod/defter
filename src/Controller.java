@@ -1,5 +1,9 @@
+import fxmltableview.Cities;
+import fxmltableview.LFile;
+import fxmltableview.Zones;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.*;
 import org.jooq.Record;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -16,15 +20,83 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 
 import static org.jooq.impl.DSL.count;
 import static org.jooq.impl.DSL.trim;
 
 public class Controller {
     public static Connection conn;
-    private static DSLContext dsl;
-    private static boolean FileLister = true;
-    private static Stage stage;
+    public static boolean FileLister = true;
+
+
+    private static void loadDataFromFile() {
+        try {
+            String XLS_FILE = "./backUp.xlsx";
+            Workbook workbook = WorkbookFactory.create(new File(XLS_FILE));
+            System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
+
+            Sheet sheet = workbook.getSheetAt(0);
+            System.out.println("\n\nIterating over Rows and Columns using Iterator\n");
+            Iterator<Row> rowIterator = ((Sheet) sheet).rowIterator();
+
+            int loop = 0;
+            while (rowIterator.hasNext()) {
+                Row row = rowIterator.next();
+
+                Iterator<Cell> cellIterator = row.cellIterator();
+
+                if(loop!=0) {
+                    LFile dosya = new LFile();
+                    /**
+                     * 0 icra dairesi
+                     * 1 dosya numarası
+                     * 2 alacaklı  (type_1)
+                     * 3 borclu (type_2)
+                     * 4 adliye
+                     * 5 bölge (zone)
+                     * 6 haciz günü
+                     * 7 evveliyat
+                     * 8 il
+                     */
+                    int activeColumn = 0;
+                    while (cellIterator.hasNext()) {
+                        Cell cell = cellIterator.next();
+
+                        if(activeColumn==0){
+                            dosya.setIcraDairesi(cell.toString());
+                        }else if(activeColumn==1){
+                            dosya.setFileNumber(cell.toString());
+                        }else if(activeColumn==2){
+                            dosya.setType1(cell.toString());
+                        }else if(activeColumn==3){
+                            dosya.setType2(cell.toString());
+                        }else if(activeColumn==4){
+                            dosya.setAdliye(cell.toString());
+                        }else if(activeColumn==5){
+                            System.out.println(cell.toString() + ":"+Zones.getIdByString(cell.toString()));
+                            dosya.setZone(Zones.getIdByString(cell.toString()),cell.toString());
+                        }else if(activeColumn==6){
+                            dosya.setHacizGunu(cell.toString());
+                        }else if(activeColumn==7){
+                            dosya.setEvliyat(cell.toString());
+                        }else if(activeColumn==8){
+                            dosya.setCity(Cities.getIdByString(cell.toString()),cell.toString());
+                        }
+                        activeColumn++;
+                    }
+                    Searcher.quickAddLocalFile(dosya);
+
+                }
+                loop++;
+            }
+
+            workbook.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     private static void loadMacFromFile() {
 
@@ -70,6 +142,7 @@ public class Controller {
                     s.execute("CREATE TABLE local_files (id integer PRIMARY KEY, file_number text NOT NULL UNIQUE , type_1 text, type_2 text,evliyat text,zone integer,city integer,icra_dairesi text,haciz_gunu text,adliye text ) ;");
                     s.execute("CREATE TABLE mac_allow (id integer PRIMARY KEY, mac text NOT NULL UNIQUE ) ;");
                     loadMacFromFile();
+                    loadDataFromFile();
                 }
                 System.out.println("Database olusturuldu");
             } catch (SQLException e) {
@@ -123,7 +196,6 @@ public class Controller {
         //login şifresi var mı diye bak yoksa oluşturma ekranına geçir
         DSLContext create = DSL.using(conn);
         Record r = create.select(trim("*"), count()).from("settings").where("key='admin'").fetchOne();
-        stage = primaryStage;
         if (Integer.parseInt(r.get("count").toString()) != 0) {
             Main.loginLayer = new Login();
             Main.loginLayer.start(primaryStage);

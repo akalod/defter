@@ -112,14 +112,14 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     private void changeSize(Double x, Double y) {
 
         if (!y.isNaN() && y.toString() != null) {
-            Main.searchLayer.textResult.setLayoutY(y - 45);
+            Main.searchLayer.textResult.setLayoutY(y - 38);
             Main.searchLayer.queryTable.setPrefHeight(y - 250);
         }
-        Main.searchLayer.newFileButton.setLayoutX(x - 188);
-        Main.searchLayer.cleanButton.setLayoutX(x - 170);
-        Main.searchLayer.textResult.setWrappingWidth(x - 40);
-        Main.searchLayer.queryBorder.setPrefWidth(x - 60);
-        Main.searchLayer.queryTable.setPrefWidth(x - 60);
+        Main.searchLayer.newFileButton.setLayoutX(x - 168);
+        Main.searchLayer.cleanButton.setLayoutX(x - 150);
+        Main.searchLayer.textResult.setWrappingWidth(x - 20);
+        Main.searchLayer.queryBorder.setPrefWidth(x - 40);
+        Main.searchLayer.queryTable.setPrefWidth(x - 40);
 
     }
 
@@ -167,7 +167,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
             }
 
         });
-        mainScene.setMinWidth(1010);
+        mainScene.setMinWidth(990);
         mainScene.setMinHeight(640);
         mainScene.sizeToScene();
         mainScene.setResizable(true);
@@ -277,13 +277,12 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                 }
             }
 
-            ra = dyn.orderBy(DSL.field("file_number"));
-            System.out.println(ra.toString());
+            ra = dyn.orderBy(DSL.field("file_number").desc());
 
 
         } else {
             //filtre yokken yapılacaklar ile ilgili kısım
-            ra = dyn.orderBy(DSL.field("file_number"));
+            ra = dyn.orderBy(DSL.field("file_number").desc());
         }
 
         totalResult = ra.fetchCount();
@@ -342,6 +341,37 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     .execute();
         } catch (Exception ex) {
             Controller.showAlert("İşlem Yapılamadı", ex.getMessage());
+        }
+    }
+
+    public static void quickAddLocalFile(LFile dosya){
+        try {
+            DSLContext query = DSL.using(Controller.conn, SQLDialect.SQLITE);
+            query.insertInto(
+                    DSL.table("local_files"),
+                    DSL.field("file_number"),
+                    DSL.field("type_1"),
+                    DSL.field("type_2"),
+                    DSL.field("evliyat"),
+                    DSL.field("zone"),
+                    DSL.field("city"),
+                    DSL.field("adliye"),
+                    DSL.field("icra_dairesi"),
+                    DSL.field("haciz_gunu")
+            ).values(
+                    dosya.getFileNumber(),
+                    dosya.getType1(),
+                    dosya.getType2(),
+                    dosya.getEvliyat(),
+                    dosya.getZoneId(),
+                    dosya.getCityId(),
+                    dosya.getAdliye(),
+                    dosya.getIcraDairesi(),
+                    dosya.getHacizGunu()
+            ).returning().fetchOne();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
 

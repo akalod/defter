@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Cities {
     public static List<City> list = Arrays.asList(
-            new City(0, 0, "Şehir"), // index 0
+            new City(0, 0, "- Şehir -"), // index 0
             new City(10, 1, "Balıkesir"),
             new City(11, 1, "Bilecik"),
             new City(16, 1, "Bursa"),
@@ -123,5 +123,17 @@ public class Cities {
 
     public static String getCity(String id){
         return getCity(Integer.parseInt(id)).getName();
+    }
+
+    public static Integer getIdByString(String par){
+        Integer result = 0;
+
+        for  (final City city : list) {
+            if( city.getName().equals(par.toUpperCase().trim())){
+                result = city.getId();
+            }
+        }
+
+        return  result;
     }
 }

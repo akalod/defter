@@ -3,12 +3,10 @@
     <output-path>$PROJECT_DIR$/out/artifacts/defter_jar</output-path>
     <root id="archive" name="defter.jar">
       <element id="module-output" name="defter" />
-      <element id="library" level="project" name="defterma" />
       <element id="library" level="project" name="bundles" />
-      <element id="library" level="project" name="ext" />
-      <element id="library" level="project" name="app" />
-      <element id="library" level="project" name="lib1" />
-      <element id="artifact" artifact-name="artifact" />
+      <element id="library" level="application" name="javafx-swt" />
+      <element id="library" level="project" name="lib" />
+      <element id="library" level="project" name="org.apache.poi:poi-ooxml:4.1.0" />
     </root>
   </artifact>
 </component>
