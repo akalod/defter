@@ -7,33 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91d400d0-ed18-4c7c-8c58-dd5646d5c93d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_poi_poi_4_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_poi_poi_ooxml_4_1_0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/defter_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/defter_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/app.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bundles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/bundles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/defterma.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/ext.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/limited.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/unlimited.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backUp.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/backUp.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/defter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/defter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macAddress.txt" beforeDir="false" afterPath="$PROJECT_DIR$/macAddress.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AddPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EditPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EditPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Searcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/AddLocalFile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/EditLocalFile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/EditLocalFile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Search.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fxmltableview/Cities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmltableview/Cities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxmltableview/LFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmltableview/LFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxmltableview/Zones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxmltableview/Zones.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

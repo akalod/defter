@@ -112,14 +112,14 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     private void changeSize(Double x, Double y) {
 
         if (!y.isNaN() && y.toString() != null) {
-            Main.searchLayer.textResult.setLayoutY(y - 38);
-            Main.searchLayer.queryTable.setPrefHeight(y - 250);
+            Main.searchLayer.textResult.setLayoutY(y - 50);
+            Main.searchLayer.queryTable.setPrefHeight(y - 260);
         }
-        Main.searchLayer.newFileButton.setLayoutX(x - 168);
-        Main.searchLayer.cleanButton.setLayoutX(x - 150);
-        Main.searchLayer.textResult.setWrappingWidth(x - 20);
-        Main.searchLayer.queryBorder.setPrefWidth(x - 40);
-        Main.searchLayer.queryTable.setPrefWidth(x - 40);
+        Main.searchLayer.newFileButton.setLayoutX(x - 188);
+        Main.searchLayer.cleanButton.setLayoutX(x - 170);
+        Main.searchLayer.textResult.setWrappingWidth(x - 40);
+        Main.searchLayer.queryBorder.setPrefWidth(x - 60);
+        Main.searchLayer.queryTable.setPrefWidth(x - 60);
 
     }
 
