@@ -1,10 +1,9 @@
-import fxmltableview.*;
+import akalod.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,8 +12,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -23,7 +20,6 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import org.jooq.*;
 import org.jooq.impl.DSL;
-import org.jooq.meta.derby.sys.Sys;
 
 import java.awt.*;
 import java.io.IOException;

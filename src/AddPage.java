@@ -1,9 +1,8 @@
-import fxmltableview.Cities;
-import fxmltableview.City;
-import fxmltableview.Zone;
-import fxmltableview.Zones;
+import akalod.Cities;
+import akalod.City;
+import akalod.Zone;
+import akalod.Zones;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

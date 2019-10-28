@@ -1,4 +1,4 @@
-package fxmltableview;
+package akalod;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,12 +1,11 @@
-import fxmltableview.Cities;
-import fxmltableview.LFile;
-import fxmltableview.Zones;
+import akalod.Cities;
+import akalod.LFile;
+import akalod.Zones;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.*;
 import org.jooq.Record;
 import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
 

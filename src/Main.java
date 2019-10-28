@@ -1,4 +1,4 @@
-import fxmltableview.LFile;
+import akalod.LFile;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
