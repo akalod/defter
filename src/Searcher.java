@@ -177,7 +177,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
 
         ObservableList a = adliye.getItems();
         a.clear();
-        a.add("ADLİYE");
+        a.add("- ADLİYE -");
         for (Record rec :
                 DSL.using(Controller.conn)
                         .select(DSL.field("DISTINCT(UPPER(adliye))").as("adliye"))
@@ -232,7 +232,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         //önce girdi var mı?
         if (zone.getValue() != null && zone.getValue().getId() != 0
                 || city.getValue() != null && city.getValue().getId() != 0
-                || adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(adliye.getValue().toString().trim())
+                || adliye.getValue() != null && !"- ADLİYE -".equalsIgnoreCase(adliye.getValue().toString().trim())
                 || q.getText() != null && !q.getText().equals("")
         ) {
 
@@ -247,7 +247,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                             if (city.getValue() != null && city.getValue().getId() != 0) {
                                 dyn.where("city ='" + city.getValue().getId() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
                             }
-                            if (adliye.getValue() != null && !"adliye".equalsIgnoreCase(adliye.getValue().toString().trim())) {
+                            if (adliye.getValue() != null && !"- ADLİYE -".equalsIgnoreCase(adliye.getValue().toString().trim())) {
                                 dyn.where("adliye ='" + adliye.getValue().toString() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
                             }
                             if (zone.getValue() != null && zone.getValue().getId() != 0) {
@@ -265,7 +265,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                 if (city.getValue() != null && city.getValue().getId() != 0) {
                     dyn.where("city ='" + city.getValue().getId() + "'");
                 }
-                if (adliye.getValue() != null && !adliye.getValue().toString().trim().equals("ADLİYE")) {
+                if (adliye.getValue() != null && !adliye.getValue().toString().trim().equals("- ADLİYE -")) {
                     dyn.where("adliye ='" + adliye.getValue().toString().trim() + "'");
                 }
                 if (zone.getValue()!=null && zone.getValue().getId()!=0) {
@@ -429,7 +429,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     @FXML
     private Runnable clearAction() {
         zone.setValue(Zones.getFirst());
-        adliye.setValue("ADLİYE");
+        adliye.setValue("- ADLİYE -");
         city.setValue(Cities.getFirst());
         q.setText("");
         refreshList();

@@ -54,9 +54,9 @@ public class Controller {
                      * 3 borclu (type_2)
                      * 4 adliye
                      * 5 bölge (zone)
-                     * 6 haciz günü
-                     * 7 evveliyat
-                     * 8 il
+                     * 6 il
+                     * 7 haciz günü
+                     * 8 evveliyat
                      */
                     int activeColumn = 0;
                     while (cellIterator.hasNext()) {
@@ -73,14 +73,13 @@ public class Controller {
                         } else if (activeColumn == 4) {
                             dosya.setAdliye(cell.toString());
                         } else if (activeColumn == 5) {
-                            System.out.println(cell.toString() + ":" + Zones.getIdByString(cell.toString()));
                             dosya.setZone(Zones.getIdByString(cell.toString()), cell.toString());
                         } else if (activeColumn == 6) {
-                            dosya.setHacizGunu(cell.toString());
+                            dosya.setCity(Cities.getIdByString(cell.toString().trim()), cell.toString().trim());
                         } else if (activeColumn == 7) {
-                            dosya.setEvliyat(cell.toString());
+                            dosya.setHacizGunu(cell.toString());
                         } else if (activeColumn == 8) {
-                            dosya.setCity(Cities.getIdByString(cell.toString()), cell.toString());
+                            dosya.setEvliyat(cell.toString());
                         }
                         activeColumn++;
                     }

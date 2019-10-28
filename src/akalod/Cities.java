@@ -128,10 +128,11 @@ public class Cities {
 
     public static Integer getIdByString(String par){
         Integer result = 0;
+        par = par.toUpperCase().trim();
 
         for  (final City city : list) {
-            if( city.getName().equals(par.toUpperCase().trim())){
-                result = city.getId();
+            if( city.getName().equals(par)){
+                return city.getId();
             }
         }
 
