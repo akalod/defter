@@ -4,7 +4,9 @@ import javafx.stage.Stage;
 
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 public class Main extends Application {
 
@@ -16,7 +18,7 @@ public class Main extends Application {
 
     public static LFile remoteData;
 
-    public static String MACAddress;
+    public static List<String> MACAddress = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -35,8 +37,7 @@ public class Main extends Application {
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < mac.length; i++)
                         sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
-                    System.out.println("MAC Adress:" + sb.toString());
-                    MACAddress = sb.toString();
+                   MACAddress.add(sb.toString());//MAC Adreslerinin dizine ekleme
                 }
             }
         }

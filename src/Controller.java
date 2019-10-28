@@ -46,7 +46,7 @@ public class Controller {
 
                 Iterator<Cell> cellIterator = row.cellIterator();
 
-                if(loop!=0) {
+                if (loop != 0) {
                     LFile dosya = new LFile();
                     /**
                      * 0 icra dairesi
@@ -63,25 +63,25 @@ public class Controller {
                     while (cellIterator.hasNext()) {
                         Cell cell = cellIterator.next();
 
-                        if(activeColumn==0){
+                        if (activeColumn == 0) {
                             dosya.setIcraDairesi(cell.toString());
-                        }else if(activeColumn==1){
+                        } else if (activeColumn == 1) {
                             dosya.setFileNumber(cell.toString());
-                        }else if(activeColumn==2){
+                        } else if (activeColumn == 2) {
                             dosya.setType1(cell.toString());
-                        }else if(activeColumn==3){
+                        } else if (activeColumn == 3) {
                             dosya.setType2(cell.toString());
-                        }else if(activeColumn==4){
+                        } else if (activeColumn == 4) {
                             dosya.setAdliye(cell.toString());
-                        }else if(activeColumn==5){
-                            System.out.println(cell.toString() + ":"+Zones.getIdByString(cell.toString()));
-                            dosya.setZone(Zones.getIdByString(cell.toString()),cell.toString());
-                        }else if(activeColumn==6){
+                        } else if (activeColumn == 5) {
+                            System.out.println(cell.toString() + ":" + Zones.getIdByString(cell.toString()));
+                            dosya.setZone(Zones.getIdByString(cell.toString()), cell.toString());
+                        } else if (activeColumn == 6) {
                             dosya.setHacizGunu(cell.toString());
-                        }else if(activeColumn==7){
+                        } else if (activeColumn == 7) {
                             dosya.setEvliyat(cell.toString());
-                        }else if(activeColumn==8){
-                            dosya.setCity(Cities.getIdByString(cell.toString()),cell.toString());
+                        } else if (activeColumn == 8) {
+                            dosya.setCity(Cities.getIdByString(cell.toString()), cell.toString());
                         }
                         activeColumn++;
                     }
@@ -155,11 +155,22 @@ public class Controller {
     public static void checkMacAllow() {
 
         DSLContext create = DSL.using(conn);
-        Record r = create.select(trim("*"), count()).from("mac_allow").where("mac='" + Main.MACAddress + "'").fetchOne();
-        if (Integer.parseInt(r.get("count").toString()) == 0) {
-            System.out.println("Erişime izin verilmedi");
-            System.exit(-1);
+
+        String tempMac = "";
+
+        for (final String mac : Main.MACAddress) {
+            tempMac = mac;
+            System.out.println(mac);
+            Record r = create.select(trim("*"), count()).from("mac_allow").where("mac='" + mac + "'").fetchOne();
+            if (Integer.parseInt(r.get("count").toString()) != 0)
+                return;
         }
+
+        Controller.showAlert("Erişim izini", "MAC Adresi geçersiz:" + tempMac);
+        System.out.println("Erişime izin verilmedi");
+        System.exit(-1);
+
+
     }
 
     public static void startup() {
