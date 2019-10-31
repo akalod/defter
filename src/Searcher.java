@@ -71,6 +71,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
             if (newSelection != null) {
                 refreshList();
                 loadSehirList();
+                city.setValue(Cities.getFirst());
             }
         });
 
@@ -159,7 +160,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     Main.searchLayer.showFile(true);
                 }
             } else {
-                System.out.println(event.getCode());
+              //  System.out.println(event.getCode());
             }
 
         });
@@ -229,6 +230,15 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                 .using(Controller.conn)
                 .selectFrom("local_files");
 
+        try {
+            System.out.println("zone:"+zone.getValue().toString());
+            System.out.println("city:"+city.getValue().toString());
+            System.out.println("adliye"+adliye.getValue().toString());
+            System.out.println("q:"+q.getText());
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
         //önce girdi var mı?
         if (zone.getValue() != null && zone.getValue().getId() != 0
                 || city.getValue() != null && city.getValue().getId() != 0
@@ -242,7 +252,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     if (i > 0) {
                         if (zone.getValue() != null && zone.getValue().getId() != 0
                                 || city.getValue() != null && city.getValue().getId() != 0
-                                || adliye.getValue() != null && !"ADLİYE".equalsIgnoreCase(adliye.getValue().toString().trim())
+                                || adliye.getValue() != null && !"- ADLİYE -".equalsIgnoreCase(adliye.getValue().toString().trim())
                         ) {
                             if (city.getValue() != null && city.getValue().getId() != 0) {
                                 dyn.where("city ='" + city.getValue().getId() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
@@ -261,7 +271,6 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     }
                 }
             } else {
-                System.out.println("else");
                 if (city.getValue() != null && city.getValue().getId() != 0) {
                     dyn.where("city ='" + city.getValue().getId() + "'");
                 }
@@ -272,7 +281,6 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     dyn.where("zone ='" + zone.getValue().getId() + "'");
                 }
             }
-
             ra = dyn.orderBy(DSL.field("file_number").desc());
 
 
