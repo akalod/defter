@@ -29,7 +29,10 @@
       </Pane>
 
      <TableView fx:id="queryTable" layoutX="20" layoutY="191.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#showFile" prefHeight="377.0" prefWidth="957.0" styleClass="grid">
-        <columns>
+         <placeholder>
+             <Label text="İçerik Bulunamadı."/>
+         </placeholder>
+         <columns>
             <TableColumn prefWidth="100" text="İCRA DAİRESİ">
                 <cellValueFactory><PropertyValueFactory property="icraDairesi" /></cellValueFactory>
             </TableColumn>

@@ -6,9 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -87,12 +86,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
             }
         });
 
-        city.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.F4) {
-                event.consume();
-            }
-        });
-
+        city.addEventFilter(KeyEvent.KEY_PRESSED, this::selectCityFromAnother);
         zone.addEventFilter(KeyEvent.KEY_PRESSED, this::selectCityFromAnother);
         adliye.addEventFilter(KeyEvent.KEY_PRESSED, this::selectCityFromAnother);
 
@@ -124,13 +118,12 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
 
         Parent root = FXMLLoader.load(getClass().getResource("Views/Search.fxml"));
         mainScene = primaryStage;
-        primaryStage.setTitle("Dosya Takip Programı");
+        primaryStage.setTitle("Takipçi");
 
         Image image = new Image("/assets/notebook.png");
         primaryStage.getIcons().add(image);
 
         Scene scene = new Scene(root);
-
 
         ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->
                 changeSize(mainScene.getWidth(), mainScene.getHeight());
@@ -160,7 +153,49 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     Main.searchLayer.showFile(true);
                 }
             } else {
-              //  System.out.println(event.getCode());
+
+                if (event.getCode().isLetterKey()) {
+
+                    String element = scene.focusOwnerProperty().get().getId();
+                    ComboBox selectionModel = null;
+                    ObservableList selectionItems = null;
+                    Boolean run = false;
+                    switch (element) {
+                        case "city":
+                            selectionModel = Main.searchLayer.city;
+                            run = true;
+                            break;
+                        case "adliye":
+                            selectionModel = Main.searchLayer.adliye;
+                            run = true;
+                            break;
+                        case "zone":
+                            selectionModel = Main.searchLayer.zone;
+                            run = true;
+                            break;
+                        default:
+
+                    }
+                    if (run) {
+                        try {
+
+                            selectionItems = selectionModel.getItems();
+                            Object selectedItem = selectionModel.getSelectionModel().getSelectedItem();
+                            for (Object item :
+                                    selectionItems) {
+                                if (item.toString().toUpperCase().startsWith(event.getCode().toString().toUpperCase()) && selectedItem != item) {
+                                    selectionModel.setValue(item);
+                                    break;
+                                }
+                            }
+
+
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                }
+
             }
 
         });
@@ -217,27 +252,24 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         data.clear();
 
         SelectSeekStep1<Record, Object> ra;
-        String[] looksUp = new String[5];
+        String[] looksUp = new String[7];
 
         looksUp[0] = "type_1";
         looksUp[1] = "type_2";
         looksUp[2] = "haciz_gunu";
         looksUp[3] = "icra_dairesi";
         looksUp[4] = "file_number";
+        looksUp[5] = "city_name";
+        looksUp[6] = "zone_name";
 
         String nQ = trFilterLike(q.getText().trim().replaceAll("'", "").toUpperCase());
         SelectWhereStep<Record> dyn = DSL
                 .using(Controller.conn)
-                .selectFrom("local_files");
+                .select(DSL.table("local_files").asterisk())
+                .from("local_files")
+                .leftJoin("cities").on("cities.id=local_files.city")
+                .leftJoin("zones").on("zones.id=local_files.zone");
 
-        try {
-            System.out.println("zone:"+zone.getValue().toString());
-            System.out.println("city:"+city.getValue().toString());
-            System.out.println("adliye"+adliye.getValue().toString());
-            System.out.println("q:"+q.getText());
-        }catch (Exception ex){
-            System.out.println(ex.getMessage());
-        }
 
         //önce girdi var mı?
         if (zone.getValue() != null && zone.getValue().getId() != 0
@@ -277,7 +309,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                 if (adliye.getValue() != null && !adliye.getValue().toString().trim().equals("- ADLİYE -")) {
                     dyn.where("adliye ='" + adliye.getValue().toString().trim() + "'");
                 }
-                if (zone.getValue()!=null && zone.getValue().getId()!=0) {
+                if (zone.getValue() != null && zone.getValue().getId() != 0) {
                     dyn.where("zone ='" + zone.getValue().getId() + "'");
                 }
             }
@@ -348,7 +380,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         }
     }
 
-    public static void quickAddLocalFile(LFile dosya){
+    public static void quickAddLocalFile(LFile dosya) {
         try {
             DSLContext query = DSL.using(Controller.conn, SQLDialect.SQLITE);
             query.insertInto(

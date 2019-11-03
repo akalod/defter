@@ -8,6 +8,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 
 public class Main extends Application {
 
@@ -29,7 +30,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws SocketException {
-
+        Locale.setDefault(new Locale("tr", "TR"));
         if(Controller.FileLister) {
             final Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
             while (((Enumeration) e).hasMoreElements()) {
