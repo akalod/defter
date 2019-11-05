@@ -153,49 +153,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     Main.searchLayer.showFile(true);
                 }
             } else {
-
-                if (event.getCode().isLetterKey()) {
-
-                    String element = scene.focusOwnerProperty().get().getId();
-                    ComboBox selectionModel = null;
-                    ObservableList selectionItems = null;
-                    Boolean run = false;
-                    switch (element) {
-                        case "city":
-                            selectionModel = Main.searchLayer.city;
-                            run = true;
-                            break;
-                        case "adliye":
-                            selectionModel = Main.searchLayer.adliye;
-                            run = true;
-                            break;
-                        case "zone":
-                            selectionModel = Main.searchLayer.zone;
-                            run = true;
-                            break;
-                        default:
-
-                    }
-                    if (run) {
-                        try {
-
-                            selectionItems = selectionModel.getItems();
-                            Object selectedItem = selectionModel.getSelectionModel().getSelectedItem();
-                            for (Object item :
-                                    selectionItems) {
-                                if (item.toString().toUpperCase().startsWith(event.getCode().toString().toUpperCase()) && selectedItem != item) {
-                                    selectionModel.setValue(item);
-                                    break;
-                                }
-                            }
-
-
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                }
-
+                    Main.selector(event, scene, Main.searchLayer.city, Main.searchLayer.adliye, Main.searchLayer.zone);
             }
 
         });

@@ -2,6 +2,7 @@ import akalod.Cities;
 import akalod.LFile;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyEvent;
@@ -35,7 +36,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SocketException {
         Locale.setDefault(new Locale("tr", "TR"));
-        if(Controller.FileLister) {
+        if (Controller.FileLister) {
             final Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
             while (((Enumeration) e).hasMoreElements()) {
                 final byte[] mac = e.nextElement().getHardwareAddress();
@@ -43,35 +44,32 @@ public class Main extends Application {
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < mac.length; i++)
                         sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
-                   MACAddress.add(sb.toString());//MAC Adreslerinin dizine ekleme
+                    MACAddress.add(sb.toString());//MAC Adreslerinin dizine ekleme
                 }
             }
         }
         launch(args);
     }
-    static void selector(KeyEvent event, Scene scene, ComboBox city, ComboBox zone, ComboBox haciz_gunu){
+
+    static void selector(KeyEvent event, Scene scene, ComboBox comboBoxOne, ComboBox comboBoxTwo, ComboBox comboBoxThree) {
         if (event.getCode().isLetterKey()) {
 
-            String element = scene.focusOwnerProperty().get().getId();
+            Node element = scene.focusOwnerProperty().get();
             ComboBox selectionModel = null;
             ObservableList selectionItems = null;
             boolean run = false;
-            switch (element) {
-                case "city":
-                    selectionModel = city;
-                    run = true;
-                    break;
-                case "zone":
-                    selectionModel = zone;
-                    run = true;
-                    break;
-                case "haciz_gunu":
-                    selectionModel = haciz_gunu;
-                    run = true;
-                    break;
-                default:
 
+            if (element == comboBoxOne) {
+                selectionModel = comboBoxOne;
+                run = true;
+            } else if (element == comboBoxTwo) {
+                selectionModel = comboBoxTwo;
+                run = true;
+            } else if (element == comboBoxThree) {
+                selectionModel = comboBoxThree;
+                run = true;
             }
+
             if (run) {
                 try {
                     selectionItems = selectionModel.getItems();
