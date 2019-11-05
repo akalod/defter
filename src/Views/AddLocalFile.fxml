@@ -14,9 +14,9 @@
       <TextField fx:id="type_1" layoutX="136.0" layoutY="106.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <TextField fx:id="type_2" layoutX="136.0" layoutY="143.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <TextField fx:id="adliye" layoutX="137.0" layoutY="182.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <ComboBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="MARMARA BÖLGESİ" />
-      <ComboBox fx:id="city" layoutX="136.0" layoutY="257.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <ComboBox fx:id="haciz_gunu" layoutX="135.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="PAZARTESİ">
+      <ComboBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="MARMARA BÖLGESİ" onKeyReleased="#keyEvent" />
+      <ComboBox fx:id="city" layoutX="136.0" layoutY="257.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" onKeyReleased="#keyEvent" />
+      <ComboBox fx:id="haciz_gunu" layoutX="135.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" value="PAZARTESİ" onKeyReleased="#keyEvent">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="PAZARTESİ" />
@@ -39,6 +39,6 @@
       <Label layoutX="20.0" layoutY="187.0" prefWidth="100.0" text="ADLİYE" alignment="CENTER_RIGHT" />
       <Label layoutX="20.0" layoutY="350.0" prefWidth="100.0" text="EVVELİYAT" alignment="CENTER_RIGHT" />
       <Button defaultButton="true" layoutX="241.0" layoutY="385.0" mnemonicParsing="false" onAction="#addAction" prefHeight="17.0" prefWidth="103.0" styleClass="add" text="Ekle" />
-      <Button fx:id="closeButton" layoutX="137.0" layoutY="385.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="31.0" prefWidth="90.0" text="İptal"/>
+      <Button fx:id="cancel" layoutX="137.0" layoutY="385.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="31.0" prefWidth="90.0" text="İptal"/>
    </children>
 </AnchorPane>

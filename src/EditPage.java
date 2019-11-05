@@ -1,4 +1,5 @@
 import akalod.*;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -100,9 +101,9 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
         if (lData.getZoneId() != 0) {
             zone.setValue(Zones.getZone(lData.getZoneId()));
         }
-        if(lData.getCityId() !=0) {
-           city.getItems().setAll(Cities.getByZone(lData.getZoneId()));
-           city.setValue(Cities.getCity(lData.getCityId()));
+        if (lData.getCityId() != 0) {
+            city.getItems().setAll(Cities.getByZone(lData.getZoneId()));
+            city.setValue(Cities.getCity(lData.getCityId()));
         }
         haciz_gunu.setValue(lData.getHacizGunu());
         icra_dairesi.setText(lData.getIcraDairesi());
@@ -132,5 +133,10 @@ public class EditPage implements EventHandler<ActionEvent>, Initializable {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
         Main.searchLayer.loadAllLists();
+    }
+
+    @FXML
+    public void keyEvent(KeyEvent event) {
+        Main.selector(event, cancel.getScene(), city, zone, haciz_gunu);
     }
 }

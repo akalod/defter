@@ -20,7 +20,7 @@
    <children>
        <Pane layoutX="20.0" layoutY="99.0" prefHeight="67.0" prefWidth="990.0" styleClass="border" fx:id="queryBorder">
          <children>
-            <TextField fx:id="q" layoutX="10.0" layoutY="15.0" onKeyPressed="#searchKeyUp" prefHeight="37.0" prefWidth="200.0" promptText="Sorgulama metnini giriniz!" styleClass="input" />
+            <TextField fx:id="q" layoutX="10.0" layoutY="15.0" onKeyReleased="#searchKeyUp" prefHeight="37.0" prefWidth="200.0" promptText="Sorgulama metnini giriniz!" styleClass="input" />
             <ComboBox fx:id="adliye" layoutX="220.0" layoutY="15.0" prefHeight="37.0" prefWidth="200.0" promptText="- ADLİYE -" styleClass="input" />
             <ComboBox fx:id="zone" layoutX="430.0" layoutY="15.0" prefHeight="37.0" prefWidth="250.0" promptText="- BÖLGE -" styleClass="input" />
             <ComboBox fx:id="city" layoutX="690.0" layoutY="15.0" prefHeight="37.0" prefWidth="150.0" promptText="- ŞEHİR -" styleClass="input" />
@@ -33,16 +33,16 @@
              <Label text="İçerik Bulunamadı."/>
          </placeholder>
          <columns>
-            <TableColumn prefWidth="100" text="İCRA DAİRESİ">
+            <TableColumn prefWidth="200" text="İCRA DAİRESİ">
                 <cellValueFactory><PropertyValueFactory property="icraDairesi" /></cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="100" text="DOSYA NO">
                 <cellValueFactory><PropertyValueFactory property="fileNumber" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100" text="ALACAKLI">
+            <TableColumn prefWidth="150" text="ALACAKLI">
                 <cellValueFactory><PropertyValueFactory property="type1" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100" text="BORÇLU">
+            <TableColumn prefWidth="150" text="BORÇLU">
                 <cellValueFactory><PropertyValueFactory property="type2" /></cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="200" text="ADLİYE">
@@ -57,7 +57,7 @@
             <TableColumn prefWidth="100" text="HACİZ GÜNÜ">
                 <cellValueFactory><PropertyValueFactory property="hacizGunu" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100" text="EVVELİYAT">
+            <TableColumn prefWidth="200" text="EVVELİYAT">
                 <cellValueFactory><PropertyValueFactory property="evliyat" /></cellValueFactory>
             </TableColumn>
         </columns>

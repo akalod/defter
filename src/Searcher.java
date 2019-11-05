@@ -203,7 +203,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         mainScene.setMinHeight(640);
         mainScene.sizeToScene();
         mainScene.setResizable(true);
-        mainScene.setMaximized(false);
+        mainScene.setMaximized(true);
         mainScene.setScene(scene);
         mainScene.show();
 

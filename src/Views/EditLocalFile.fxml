@@ -15,9 +15,9 @@
       <TextField fx:id="type_1" layoutX="136.0" layoutY="106.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <TextField fx:id="type_2" layoutX="136.0" layoutY="143.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
       <TextField fx:id="adliye" layoutX="136.0" layoutY="182.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <ComboBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <ComboBox fx:id="city" layoutX="136.0" layoutY="257.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" />
-      <ComboBox fx:id="haciz_gunu" layoutX="136.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input">
+      <ComboBox fx:id="zone" layoutX="136.0" layoutY="219.0" prefHeight="25.0" prefWidth="209.0" styleClass="input"  onKeyReleased="#keyEvent" />
+      <ComboBox fx:id="city" layoutX="136.0" layoutY="257.0" prefHeight="25.0" prefWidth="209.0" styleClass="input"  onKeyReleased="#keyEvent" />
+      <ComboBox fx:id="haciz_gunu" layoutX="136.0" layoutY="300.0" prefHeight="25.0" prefWidth="209.0" styleClass="input" onKeyReleased="#keyEvent">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="PAZARTESİ" />

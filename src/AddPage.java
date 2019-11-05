@@ -2,6 +2,7 @@ import akalod.Cities;
 import akalod.City;
 import akalod.Zone;
 import akalod.Zones;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.jooq.meta.derby.sys.Sys;
 import ru.vas7n.va.widgets.MaskField;
 
 import java.net.URL;
@@ -27,7 +29,7 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     TextField type_2;
     @FXML
-    private ComboBox<Zone> zone;
+    ComboBox<Zone> zone;
     @FXML
     TextField icra_dairesi;
     @FXML
@@ -35,7 +37,7 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
     @FXML
     ComboBox haciz_gunu;
     @FXML
-    private ComboBox<City> city;
+    ComboBox<City> city;
     @FXML
     TextField evliyat;
 
@@ -44,6 +46,7 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
     public void start() throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("Views/AddLocalFile.fxml"));
+
         primaryStage = new Stage();
         primaryStage.setTitle("Yeni Dosya Ekle");
 
@@ -51,14 +54,15 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
         primaryStage.getIcons().add(image);
 
         Scene screen = new Scene(root);
-
-        primaryStage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
-            if (KeyCode.ESCAPE == event.getCode()) {
-                primaryStage.close();
-            }
-        });
         primaryStage.setResizable(false);
         primaryStage.setScene(screen);
+
+        primaryStage.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+                    if (KeyCode.ESCAPE == event.getCode()) {
+                        primaryStage.close();
+                    }
+                }
+        );
         primaryStage.show();
     }
 
@@ -67,10 +71,17 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
         System.out.println(event.getEventType());
     }
 
+
+    @FXML
+    public void keyEvent(KeyEvent event) {
+        Main.selector(event, cancel.getScene(), city, zone, haciz_gunu);
+    }
+
+
     @FXML
     private void addAction(ActionEvent event) {
 
-        String localFileName = file_number.getText().toUpperCase().replaceAll("_","");
+        String localFileName = file_number.getText().toUpperCase().replaceAll("_", "");
 
         if (localFileName.equals("/")
                 || city.getValue().getId().equals(0)
@@ -93,17 +104,17 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
                 icra_dairesi.getText(),
                 haciz_gunu.getValue().toString(),
                 evliyat.getText());
-        Stage stage = (Stage) closeButton.getScene().getWindow();
+        Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
         Main.searchLayer.loadAllLists();
     }
 
     @FXML
-    private javafx.scene.control.Button closeButton;
+    private javafx.scene.control.Button cancel;
 
     @FXML
     private void cancelAction() {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
+        Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
 
