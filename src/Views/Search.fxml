@@ -24,6 +24,19 @@
             <ComboBox fx:id="adliye" layoutX="220.0" layoutY="15.0" prefHeight="37.0" prefWidth="200.0" promptText="- ADLİYE -" styleClass="input" />
             <ComboBox fx:id="zone" layoutX="430.0" layoutY="15.0" prefHeight="37.0" prefWidth="250.0" promptText="- BÖLGE -" styleClass="input" />
             <ComboBox fx:id="city" layoutX="690.0" layoutY="15.0" prefHeight="37.0" prefWidth="150.0" promptText="- ŞEHİR -" styleClass="input" />
+            <ComboBox fx:id="haciz_gunu" layoutX="850.0" layoutY="15.0" prefHeight="37.0" prefWidth="150.0" styleClass="input" value="- HACİZ GÜNÜ -">
+             <items>
+                 <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="- HACİZ GÜNÜ -" />
+                     <String fx:value="PAZARTESİ" />
+                     <String fx:value="SALI" />
+                     <String fx:value="ÇARŞAMBA" />
+                     <String fx:value="PERŞEMBE" />
+                     <String fx:value="CUMA" />
+                     <String fx:value="DİĞER" />
+                 </FXCollections>
+             </items>
+            </ComboBox>
             <Button fx:id="cleanButton" layoutX="850.0" layoutY="15.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="37.0" prefWidth="100"  text="Temizle" styleClass="search"/>
          </children>
       </Pane>
@@ -33,31 +46,31 @@
              <Label text="İçerik Bulunamadı."/>
          </placeholder>
          <columns>
-            <TableColumn prefWidth="200" text="İCRA DAİRESİ">
+            <TableColumn prefWidth="120" text="İCRA DAİRESİ">
                 <cellValueFactory><PropertyValueFactory property="icraDairesi" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100" text="DOSYA NO">
+            <TableColumn prefWidth="80" text="DOSYA NO">
                 <cellValueFactory><PropertyValueFactory property="fileNumber" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="150" text="ALACAKLI">
+            <TableColumn prefWidth="160" text="ALACAKLI">
                 <cellValueFactory><PropertyValueFactory property="type1" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="150" text="BORÇLU">
+            <TableColumn prefWidth="160" text="BORÇLU">
                 <cellValueFactory><PropertyValueFactory property="type2" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="200" text="ADLİYE">
+            <TableColumn prefWidth="120" text="ADLİYE">
                 <cellValueFactory><PropertyValueFactory property="adliye" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="140" text="BÖLGE">
+            <TableColumn prefWidth="150" text="BÖLGE">
                 <cellValueFactory><PropertyValueFactory property="zone" /></cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="100" text="ŞEHİR">
                 <cellValueFactory><PropertyValueFactory property="city" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="100" text="HACİZ GÜNÜ">
+            <TableColumn prefWidth="90" text="HACİZ GÜNÜ">
                 <cellValueFactory><PropertyValueFactory property="hacizGunu" /></cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="200" text="EVVELİYAT">
+            <TableColumn prefWidth="345" text="EVVELİYAT">
                 <cellValueFactory><PropertyValueFactory property="evliyat" /></cellValueFactory>
             </TableColumn>
         </columns>

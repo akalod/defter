@@ -1,6 +1,7 @@
 import akalod.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +26,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Searcher implements EventHandler<ActionEvent>, Initializable {
@@ -48,6 +51,8 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
 
     @FXML
     private ComboBox adliye;
+    @FXML
+    private ComboBox haciz_gunu;
     @FXML
     private ComboBox<City> city;
 
@@ -80,6 +85,12 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
             }
         });
 
+        haciz_gunu.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                refreshList();
+            }
+        });
+
         adliye.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 refreshList();
@@ -89,6 +100,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         city.addEventFilter(KeyEvent.KEY_PRESSED, this::selectCityFromAnother);
         zone.addEventFilter(KeyEvent.KEY_PRESSED, this::selectCityFromAnother);
         adliye.addEventFilter(KeyEvent.KEY_PRESSED, this::selectCityFromAnother);
+        haciz_gunu.addEventFilter(KeyEvent.KEY_PRESSED, this::selectCityFromAnother);
 
         zone.getItems().clear();
         zone.getItems().addAll(Zones.getAll());
@@ -118,7 +130,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
 
         Parent root = FXMLLoader.load(getClass().getResource("Views/Search.fxml"));
         mainScene = primaryStage;
-        primaryStage.setTitle("Takipçi");
+        primaryStage.setTitle("HACİZ PROGRAMI");
 
         Image image = new Image("/assets/notebook.png");
         primaryStage.getIcons().add(image);
@@ -141,6 +153,8 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
             } else if (event.getCode() == KeyCode.F4) {
                 Main.searchLayer.city.requestFocus();
             } else if (event.getCode() == KeyCode.F5) {
+                Main.searchLayer.haciz_gunu.requestFocus();
+            } else if (event.getCode() == KeyCode.F7) {
                 Main.searchLayer.clearAction();
             } else if (event.getCode() == KeyCode.F9) {
                 Main.searchLayer.queryTable.requestFocus();
@@ -153,11 +167,11 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                     Main.searchLayer.showFile(true);
                 }
             } else {
-                    Main.selector(event, scene, Main.searchLayer.city, Main.searchLayer.adliye, Main.searchLayer.zone);
+                Main.selector(event, scene, Main.searchLayer.city, Main.searchLayer.adliye, Main.searchLayer.zone,Main.searchLayer.haciz_gunu);
             }
 
         });
-        mainScene.setMinWidth(990);
+        mainScene.setMinWidth(1170);
         mainScene.setMinHeight(640);
         mainScene.sizeToScene();
         mainScene.setResizable(true);
@@ -210,7 +224,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         data.clear();
 
         SelectSeekStep1<Record, Object> ra;
-        String[] looksUp = new String[7];
+        String[] looksUp = new String[8];
 
         looksUp[0] = "type_1";
         looksUp[1] = "type_2";
@@ -219,6 +233,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         looksUp[4] = "file_number";
         looksUp[5] = "city_name";
         looksUp[6] = "zone_name";
+        looksUp[7] = "adliye";
 
         String nQ = trFilterLike(q.getText().trim().replaceAll("'", "").toUpperCase());
         SelectWhereStep<Record> dyn = DSL
@@ -233,6 +248,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
         if (zone.getValue() != null && zone.getValue().getId() != 0
                 || city.getValue() != null && city.getValue().getId() != 0
                 || adliye.getValue() != null && !"- ADLİYE -".equalsIgnoreCase(adliye.getValue().toString().trim())
+                || haciz_gunu.getValue() != null && !"- HACİZ GÜNÜ -".equalsIgnoreCase(haciz_gunu.getValue().toString().trim())
                 || q.getText() != null && !q.getText().equals("")
         ) {
 
@@ -243,6 +259,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                         if (zone.getValue() != null && zone.getValue().getId() != 0
                                 || city.getValue() != null && city.getValue().getId() != 0
                                 || adliye.getValue() != null && !"- ADLİYE -".equalsIgnoreCase(adliye.getValue().toString().trim())
+                                || haciz_gunu.getValue() != null && !"- HACIZ GÜNÜ -".equalsIgnoreCase(haciz_gunu.getValue().toString().trim())
                         ) {
                             if (city.getValue() != null && city.getValue().getId() != 0) {
                                 dyn.where("city ='" + city.getValue().getId() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
@@ -252,6 +269,9 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                             }
                             if (zone.getValue() != null && zone.getValue().getId() != 0) {
                                 dyn.where("zone ='" + zone.getValue().getId() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
+                            }
+                            if (haciz_gunu.getValue() != null && !"- HACIZ GUNU -".equalsIgnoreCase(haciz_gunu.getValue().toString().trim())) {
+                                dyn.where("haciz_gunu ='" + haciz_gunu.getValue().toString() + "'").or(looksUp[i] + " like '%" + nQ + "%' ");
                             }
                         } else {
                             dyn.where("1=1").or(looksUp[i] + " like '%" + nQ + "%' ");
@@ -266,6 +286,9 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
                 }
                 if (adliye.getValue() != null && !adliye.getValue().toString().trim().equals("- ADLİYE -")) {
                     dyn.where("adliye ='" + adliye.getValue().toString().trim() + "'");
+                }
+                if (haciz_gunu.getValue() != null && !haciz_gunu.getValue().toString().trim().equals("- HACİZ GÜNÜ -")) {
+                    dyn.where("haciz_gunu ='" + haciz_gunu.getValue().toString().trim() + "'");
                 }
                 if (zone.getValue() != null && zone.getValue().getId() != 0) {
                     dyn.where("zone ='" + zone.getValue().getId() + "'");
@@ -428,6 +451,7 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     private Runnable clearAction() {
         zone.setValue(Zones.getFirst());
         adliye.setValue("- ADLİYE -");
+        haciz_gunu.setValue("- HACİZ GÜNÜ -");
         city.setValue(Cities.getFirst());
         q.setText("");
         refreshList();
@@ -465,7 +489,13 @@ public class Searcher implements EventHandler<ActionEvent>, Initializable {
     }
 
     @FXML
-    private void showFile() {
-        showFile(false);
+    private void showFile(Event e) {
+        List<String> allow = new ArrayList<>();
+        allow.add("javafx.scene.control.TableColumn$1$1");
+        allow.add("com.sun.javafx.scene.control.LabeledText");
+
+        if (allow.indexOf(e.getTarget().getClass().getName()) != -1) {
+            showFile(false);
+        }
     }
 }

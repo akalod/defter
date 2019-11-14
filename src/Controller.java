@@ -2,11 +2,15 @@ import akalod.Cities;
 import akalod.LFile;
 import akalod.Zones;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.*;
 import org.jooq.Record;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
+import org.jooq.meta.derby.sys.Sys;
 
 
 import java.io.BufferedReader;
@@ -20,6 +24,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
+import java.util.Optional;
 
 import static org.jooq.impl.DSL.count;
 import static org.jooq.impl.DSL.trim;
@@ -30,102 +35,141 @@ public class Controller {
 
 
     private static void loadDataFromFile() {
-        try {
-            String XLS_FILE = "./backUp.xlsx";
-            Workbook workbook = WorkbookFactory.create(new File(XLS_FILE));
-            System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
+        String XLS_FILE = "./backUp.xlsx";
+        File dbFile = new File(XLS_FILE);
+        boolean exists = dbFile.exists();
+        if (!exists) {
+            return;
+        }
+        Alert dia = new Alert(Alert.AlertType.CONFIRMATION);
+        dia.setHeaderText("Excel Veri girişi mevcut");
+        dia.setContentText("Girdi işlemi eşleşmelere göre otomatik yapılacaktır. Girilen verilerin veri tekrarı kontrol edilmeden girilecektir. İşlemin devam etmesini onaylıyor musunuz?");
 
-            Sheet sheet = workbook.getSheetAt(0);
-            System.out.println("\n\nIterating over Rows and Columns using Iterator\n");
-            Iterator<Row> rowIterator = ((Sheet) sheet).rowIterator();
+        ButtonType allow = new ButtonType("Onayla");
+        ButtonType cancel = new ButtonType("iptal", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dia.getButtonTypes().setAll(allow, cancel);
 
-            int loop = 0;
-            while (rowIterator.hasNext()) {
-                Row row = rowIterator.next();
+        Optional<ButtonType> result = dia.showAndWait();
+        if (result.get() == allow) {
 
-                Iterator<Cell> cellIterator = row.cellIterator();
 
-                if (loop != 0) {
-                    LFile dosya = new LFile();
-                    /**
-                     * 0 icra dairesi
-                     * 1 dosya numarası
-                     * 2 alacaklı  (type_1)
-                     * 3 borclu (type_2)
-                     * 4 adliye
-                     * 5 bölge (zone)
-                     * 6 il
-                     * 7 haciz günü
-                     * 8 evveliyat
-                     */
-                    int activeColumn = 0;
-                    while (cellIterator.hasNext()) {
-                        Cell cell = cellIterator.next();
+            try {
+                Workbook workbook = WorkbookFactory.create(new File(XLS_FILE));
+                System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
 
-                        if (activeColumn == 0) {
-                            dosya.setIcraDairesi(cell.toString());
-                        } else if (activeColumn == 1) {
-                            dosya.setFileNumber(cell.toString());
-                        } else if (activeColumn == 2) {
-                            dosya.setType1(cell.toString());
-                        } else if (activeColumn == 3) {
-                            dosya.setType2(cell.toString());
-                        } else if (activeColumn == 4) {
-                            dosya.setAdliye(cell.toString());
-                        } else if (activeColumn == 5) {
-                            dosya.setZone(Zones.getIdByString(cell.toString()), cell.toString());
-                        } else if (activeColumn == 6) {
-                            dosya.setCity(Cities.getIdByString(cell.toString().trim()), cell.toString().trim());
-                        } else if (activeColumn == 7) {
-                            dosya.setHacizGunu(cell.toString());
-                        } else if (activeColumn == 8) {
-                            dosya.setEvliyat(cell.toString());
+                Sheet sheet = workbook.getSheetAt(0);
+                System.out.println("\n\nIterating over Rows and Columns using Iterator\n");
+                Iterator<Row> rowIterator = ((Sheet) sheet).rowIterator();
+
+                int loop = 0;
+                while (rowIterator.hasNext()) {
+                    Row row = rowIterator.next();
+
+                    Iterator<Cell> cellIterator = row.cellIterator();
+
+                    if (loop != 0) {
+                        LFile dosya = new LFile();
+                        /**
+                         * 0 icra dairesi
+                         * 1 dosya numarası
+                         * 2 alacaklı  (type_1)
+                         * 3 borclu (type_2)
+                         * 4 adliye
+                         * 5 bölge (zone)
+                         * 6 il
+                         * 7 haciz günü
+                         * 8 evveliyat
+                         */
+                        int activeColumn = 0;
+                        while (cellIterator.hasNext()) {
+                            Cell cell = cellIterator.next();
+
+                            if (activeColumn == 0) {
+                                dosya.setIcraDairesi(cell.toString());
+                            } else if (activeColumn == 1) {
+                                dosya.setFileNumber(cell.toString());
+                            } else if (activeColumn == 2) {
+                                dosya.setType1(cell.toString());
+                            } else if (activeColumn == 3) {
+                                dosya.setType2(cell.toString());
+                            } else if (activeColumn == 4) {
+                                dosya.setAdliye(cell.toString());
+                            } else if (activeColumn == 5) {
+                                dosya.setZone(Zones.getIdByString(cell.toString()), cell.toString());
+                            } else if (activeColumn == 6) {
+                                dosya.setCity(Cities.getIdByString(cell.toString().trim()), cell.toString().trim());
+                            } else if (activeColumn == 7) {
+                                dosya.setHacizGunu(cell.toString());
+                            } else if (activeColumn == 8) {
+                                dosya.setEvliyat(cell.toString());
+                            }
+                            activeColumn++;
                         }
-                        activeColumn++;
+                        Searcher.quickAddLocalFile(dosya);
+
                     }
-                    Searcher.quickAddLocalFile(dosya);
-
+                    loop++;
                 }
-                loop++;
+
+                workbook.close();
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-
-            workbook.close();
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
     }
 
     private static void loadMacFromFile() {
 
-        try {
-            Statement s = conn.createStatement();
-            StringBuilder sb = new StringBuilder();
+        String fileName = "BBBSetting";
+        File dbFile = new File(fileName);
+        boolean exists = dbFile.exists();
+        if (!exists) {
+            return;
+        }
+        Alert dia = new Alert(Alert.AlertType.CONFIRMATION);
+        dia.setHeaderText("MAC Adresi girişi bulundu");
+        dia.setContentText("Yeni mac adresi girişlerini onaylıyor musunuz?");
 
-            try (BufferedReader br = Files.newBufferedReader(Paths.get("BBBSetting"))) {
+        ButtonType allow = new ButtonType("Onayla");
+        ButtonType cancel = new ButtonType("iptal", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dia.getButtonTypes().setAll(allow, cancel);
 
-                // read line by line
-                String line;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line);
-                    // sql into
-                    s.execute("INSERT INTO mac_allow (mac) VALUES('" + sb.toString() + "')");
-                    sb = new StringBuilder();
+        Optional<ButtonType> result = dia.showAndWait();
+        if (result.get() == allow) {
+            try {
+                Statement s = conn.createStatement();
+                StringBuilder sb = new StringBuilder();
+
+                try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName))) {
+
+                    // read line by line
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                        // sql into
+                        s.execute("INSERT INTO mac_allow (mac) VALUES('" + sb.toString() + "')");
+                        sb = new StringBuilder();
+                    }
+
+                } catch (IOException e) {
+                    System.err.format("IOException: %s%n", e);
+                    System.exit(-1);
                 }
 
-            } catch (IOException e) {
-                System.err.format("IOException: %s%n", e);
+                System.out.println(sb);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                showAlert("Hata: MAC adresi girişi yapılamadı, daha önceden girilmiş olabilir.", e.getMessage());
                 System.exit(-1);
             }
-
-            System.out.println(sb);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.exit(-1);
+        } else {
+            System.out.println("iptal");
         }
+
     }
 
-    private static void loadSQLFiles(){
+    private static void loadSQLFiles() {
 
     }
 
@@ -234,8 +278,6 @@ public class Controller {
                     s.execute("INSERT INTO zones VALUES (6, \"İÇ ANADOLU BÖGESİ\");");
                     s.execute("INSERT INTO zones VALUES (7, \"KARADENİZ BÖLGESİ\");");
                     loadSQLFiles();
-                    loadMacFromFile();
-                    loadDataFromFile();
                 }
                 System.out.println("Database olusturuldu");
             } catch (SQLException e) {
@@ -278,7 +320,9 @@ public class Controller {
         if (!exists) {
             createDB();
         }
+        loadMacFromFile();
         checkMacAllow();
+        loadDataFromFile();
     }
 
     public static void showAlert(String Title, String notice) {
@@ -288,6 +332,7 @@ public class Controller {
     public static void showWarning(String Title, String notice) {
         showAlert(Title, notice, Alert.AlertType.WARNING);
     }
+
 
     public static void showAlert(String Title, String notice, Alert.AlertType errorType) {
         Alert alert = new Alert(errorType);

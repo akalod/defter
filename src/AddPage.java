@@ -74,7 +74,7 @@ public class AddPage implements EventHandler<ActionEvent>, Initializable {
 
     @FXML
     public void keyEvent(KeyEvent event) {
-        Main.selector(event, cancel.getScene(), city, zone, haciz_gunu);
+        Main.selector(event, cancel.getScene(), city, zone, haciz_gunu,null);
     }
 
 

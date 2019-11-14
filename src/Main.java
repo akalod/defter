@@ -51,13 +51,38 @@ public class Main extends Application {
         launch(args);
     }
 
-    static void selector(KeyEvent event, Scene scene, ComboBox comboBoxOne, ComboBox comboBoxTwo, ComboBox comboBoxThree) {
-        if (event.getCode().isLetterKey()) {
+    static void selector(KeyEvent event, Scene scene, ComboBox comboBoxOne, ComboBox comboBoxTwo, ComboBox comboBoxThree, ComboBox comboBoxFour) {
+
+
+        System.out.println(event.getCode());
+
+        List<String> allow = new ArrayList<>();
+        List<String> change = new ArrayList<>();
+
+        allow.add("SEMICOLON"); //ş
+        change.add("Ş");
+        allow.add("PERIOD"); //ç
+        change.add("Ç");
+        allow.add("CLOSE_BRACKET"); //ü
+        change.add("Ü");
+        allow.add("COMMA"); //ö
+        change.add("Ö");
+        allow.add("QUOTE");
+        change.add("İ");
+
+        int index = allow.indexOf(event.getCode().toString());
+
+        if (event.getCode().isLetterKey() || index != -1) {
 
             Node element = scene.focusOwnerProperty().get();
             ComboBox selectionModel = null;
             ObservableList selectionItems = null;
             boolean run = false;
+            String charStart = event.getCode().toString().toUpperCase();
+
+            if (index != -1) {
+                charStart = change.get(index);
+            }
 
             if (element == comboBoxOne) {
                 selectionModel = comboBoxOne;
@@ -68,6 +93,9 @@ public class Main extends Application {
             } else if (element == comboBoxThree) {
                 selectionModel = comboBoxThree;
                 run = true;
+            }else if (element == comboBoxFour) {
+                selectionModel = comboBoxFour;
+                run = true;
             }
 
             if (run) {
@@ -76,7 +104,7 @@ public class Main extends Application {
                     Object selectedItem = selectionModel.getSelectionModel().getSelectedItem();
                     for (Object item :
                             selectionItems) {
-                        if (item.toString().toUpperCase().startsWith(event.getCode().toString().toUpperCase()) && selectedItem != item) {
+                        if (item.toString().toUpperCase().startsWith(charStart) && selectedItem != item) {
                             selectionModel.setValue(item);
                             break;
                         }
